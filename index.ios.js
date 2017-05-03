@@ -17,7 +17,10 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 export default class mobile_inventory extends Component {
   onSuccess(e) {
     alert(e.data)
-    // Linking.openURL(e.data).catch(err => console.error('An error occured', err))
+    fetch(`http://localhost:8082/api/v1/products/${e.data}`)
+      .then(res => {
+        alert(res.json())
+      })
   }
 
   render() {
