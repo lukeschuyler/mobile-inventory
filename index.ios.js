@@ -16,8 +16,9 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 export default class Scanner extends Component {
   onSuccess(e) {
     fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
-      .then(res => {
-        alert(res.json())
+      .then(res => res.json())
+      .then(product => {
+        alert(product.image)
       })
   }
 
