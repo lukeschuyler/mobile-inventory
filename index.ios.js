@@ -8,16 +8,14 @@ import {
   Text,
   NavigatorIOS,
   TouchableOpacity,
-  TouchableHighlight,
-  Linking,
+  TouchableHighlight
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
-export default class mobile_inventory extends Component {
+export default class Scanner extends Component {
   onSuccess(e) {
-    alert(e.data)
-    fetch(`http://localhost:8082/api/v1/products/${e.data}`)
+    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(res => {
         alert(res.json())
       })
@@ -75,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('mobile_inventory', () => mobile_inventory);
+AppRegistry.registerComponent('mobile_inventory', () => Scanner);
