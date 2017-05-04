@@ -19,7 +19,7 @@ export default class Scanner extends Component {
     fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(res => res.json())
       .then(product => {
-        alert(product.image)
+        
       })
   }
 
@@ -31,7 +31,7 @@ export default class Scanner extends Component {
             title: 'Scan Code',
             passProps: {
               onRead: this.onSuccess.bind(this),
-              topContent: <Text style={styles.centerText}>Go to <Text style={styles.textBold}>Scan Item</Text> on your computer and scan the QR code.</Text>,
+              topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
               bottomContent: <View style={styles.navContainer}><TouchableOpacity style={styles.buttonTouchable}><Text style={styles.buttonText}>Cancel</Text></TouchableOpacity><TouchableOpacity style={styles.buttonTouchable}><Text style={styles.buttonText}>Review</Text></TouchableOpacity></View>
             }
           }}
@@ -45,7 +45,8 @@ const styles = StyleSheet.create({
   navContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'row'
   },
   centerText: {
     flex: 1,
@@ -62,6 +63,6 @@ const styles = StyleSheet.create({
     color: 'rgb(0,122,255)',
   },
   buttonTouchable: {
-    padding: 16
+    padding: 50
   }
 });
