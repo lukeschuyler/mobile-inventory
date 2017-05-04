@@ -12,31 +12,37 @@ import {
   TouchableOpacity,
   TouchableHighlight,
   View,
-  Modal
+  Modal,
+  Image
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class Scanner extends Component {
+  static propTypes = {
+      title: PropTypes.string,
+      navigator: PropTypes.object.isRequired
+    }
 
   state = {
     modalVisible: false,
+    currentProduct: {},
+    sessionArray: [],
+    sessionType: this.props.title,
   }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
 
-  static propTypes = {
-      title: PropTypes.string,
-      navigator: PropTypes.object.isRequired
-    }
-
   onSuccess(e) {
     fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(res => res.json())
       .then(product => {
-        this.setModalVisible(!this.state.modalVisible)
+        this.setState({modalVisible: true, currentProduct: product})
+      })
+      .catch(() => {
+        alert('Product Not Found!')
       })
   }
 
@@ -58,19 +64,22 @@ export default class Scanner extends Component {
       )   
     }  else {
       return (
-        <View style={{marginTop: 22}}>
+        <View>
           <Modal
             animationType={"slide"}
             transparent={true}
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
-           <View style={{marginTop: 22}}>
+           <View style={styles.modalView}>
             <View>
-              <Text>Hello World!</Text>
-
+              <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>
+              <Image
+                source={{uri: this.state.currentProduct.image}}
+                style={styles.productImage}
+              />
               <TouchableHighlight onPress={() => {
-                this.setModalVisible(!this.state.modalVisible)
+                this.setModalVisible(false)
               }}>
                 <Text>Hide Modal</Text>
               </TouchableHighlight>
@@ -85,6 +94,16 @@ export default class Scanner extends Component {
 }
 
 const styles = StyleSheet.create({
+  modalView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  productImage: {
+    height: 200,
+    width: 200,
+    borderRadius: 100
+  },
   navContainer: {
     flex: 1,
     alignItems: 'center',
