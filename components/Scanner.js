@@ -19,7 +19,7 @@ export default class Scanner extends Component {
     fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(res => res.json())
       .then(product => {
-        
+        alert(product.image)
       })
   }
 
