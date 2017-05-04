@@ -1,6 +1,8 @@
 'use strict';
  
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
+import Home from './Home'
+import Popup from './Popup'
  
 import {
   AppRegistry,
@@ -9,26 +11,42 @@ import {
   NavigatorIOS,
   TouchableOpacity,
   TouchableHighlight,
-  View
+  View,
+  Modal
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class Scanner extends Component {
+
+  state = {
+    modalVisible: false,
+  }
+
+  setModalVisible(visible) {
+    this.setState({modalVisible: visible});
+  }
+
+  static propTypes = {
+      title: PropTypes.string,
+      navigator: PropTypes.object.isRequired
+    }
+
   onSuccess(e) {
     fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(res => res.json())
       .then(product => {
-        alert(product.image)
+        this.setModalVisible(!this.state.modalVisible)
       })
   }
 
   render() {
-      return (
+    if (!this.state.modalVisible) {
+       return (
         <NavigatorIOS
           initialRoute={{
             component: QRCodeScanner,
-            title: 'Scan Code',
+            title: 'Scanner',
             passProps: {
               onRead: this.onSuccess.bind(this),
               topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
@@ -37,8 +55,33 @@ export default class Scanner extends Component {
           }}
           style={{flex: 1}}
         />
+      )   
+    }  else {
+      return (
+        <View style={{marginTop: 22}}>
+          <Modal
+            animationType={"slide"}
+            transparent={true}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {alert("Modal has been closed.")}}
+            >
+           <View style={{marginTop: 22}}>
+            <View>
+              <Text>Hello World!</Text>
+
+              <TouchableHighlight onPress={() => {
+                this.setModalVisible(!this.state.modalVisible)
+              }}>
+                <Text>Hide Modal</Text>
+              </TouchableHighlight>
+
+            </View>
+           </View>
+          </Modal>
+        </View>
       )
     }
+  }
 }
 
 const styles = StyleSheet.create({
