@@ -13,7 +13,8 @@ import {
   TouchableHighlight,
   View,
   Modal,
-  Image
+  Image,
+  ScrollView
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -78,6 +79,11 @@ export default class Scanner extends Component {
                 source={{uri: this.state.currentProduct.image}}
                 style={styles.productImage}
               />
+            <ScrollView>
+            </ScrollView>
+              <Text style={styles.textBold}>
+                {this.state.currentProduct.description}
+              </Text>
               <TouchableHighlight onPress={() => {
                 this.setModalVisible(false)
               }}>
@@ -96,13 +102,13 @@ export default class Scanner extends Component {
 const styles = StyleSheet.create({
   modalView: {
     flex: 1,
+    padding: 50,
     justifyContent: 'center',
     alignItems: 'center'
   },
   productImage: {
     height: 200,
-    width: 200,
-    borderRadius: 100
+    width: 300,
   },
   navContainer: {
     flex: 1,
@@ -117,6 +123,7 @@ const styles = StyleSheet.create({
     color: '#777',
   },
   textBold: {
+    fontSize: 21,
     fontWeight: '500',
     color: '#000',
   },
