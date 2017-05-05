@@ -73,25 +73,33 @@ export default class Scanner extends Component {
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
            <View style={styles.modalView}>
-            <View>
+
+            <View style={styles.infoContainer}>
               <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>
+              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>             
               <Image
                 source={{uri: this.state.currentProduct.image}}
                 style={styles.productImage}
               />
-            <ScrollView>
-            </ScrollView>
-              <Text style={styles.textBold}>
-                {this.state.currentProduct.description}
-              </Text>
-              <TouchableHighlight onPress={() => {
-                this.setModalVisible(false)
-              }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-
+              <ScrollView>
+                <Text style={styles.textBold}>
+                  {this.state.currentProduct.description}
+                </Text>
+              </ScrollView>
             </View>
+
+            <View style={styles.qtyConatiner}>
+              <TouchableHighlight 
+                style={styles.cancelBtn} 
+                onPress={() => {
+                  this.setModalVisible(false)
+                }}>
+                <Text>Cancel</Text>
+              </TouchableHighlight>
+            </View>
+
            </View>
+
           </Modal>
         </View>
       )
@@ -101,10 +109,19 @@ export default class Scanner extends Component {
 
 const styles = StyleSheet.create({
   modalView: {
-    flex: 1,
-    padding: 50,
+    flex: 1
+  },
+  infoContainer: {
+    flex: 2,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 20
+  },
+  qtyConatiner: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row'
   },
   productImage: {
     height: 200,
