@@ -14,8 +14,8 @@ import {
   View,
   Modal,
   Image,
-  ScrollView,
-  TextInput
+  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -74,7 +74,7 @@ export default class Scanner extends Component {
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
-           <View style={styles.modalView}>
+           <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
 
             <View style={styles.infoContainer}>
               <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
@@ -82,41 +82,37 @@ export default class Scanner extends Component {
                 source={{uri: this.state.currentProduct.image}}
                 style={styles.productImage}
               />
-              <ScrollView>
-                <Text>
-                  {this.state.currentProduct.description}
-                </Text>
-              </ScrollView>
+
             </View>
 
-            <View style={styles.qtyConatiner}>
-              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
-              <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
-              <TextInput 
-                onChangeText={(qty) => this.setState({qty})}
-                value={this.state.qty}
-                style={styles.qtyInput} 
-              />
-            </View>
+              <View style={styles.qtyConatiner}>
+                <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
+                <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
+                <TextInput 
+                  onChangeText={(qty) => this.setState({qty})}
+                  value={this.state.qty}
+                  style={styles.qtyInput} 
+                />
+              </View>
 
-            <View style={styles.btnContainer}>
-              <TouchableHighlight 
-                style={styles.cancelBtn} 
-                onPress={() => {
-                  this.setModalVisible(false)
-                }}>
-                <Text>Cancel</Text>
-              </TouchableHighlight>
-              <TouchableHighlight 
-                style={styles.enterBtn} 
-                onPress={() => {
-                  this.setModalVisible(false)
-                }}>
-                <Text>Enter</Text>
-              </TouchableHighlight>
-            </View>
+              <View style={styles.btnContainer}>
+                <TouchableHighlight 
+                  style={styles.cancelBtn} 
+                  onPress={() => {
+                    this.setModalVisible(false)
+                  }}>
+                  <Text>Cancel</Text>
+                </TouchableHighlight>
+                <TouchableHighlight 
+                  style={styles.enterBtn} 
+                  onPress={() => {
+                    this.setModalVisible(false)
+                  }}>
+                  <Text>Enter</Text>
+                </TouchableHighlight>
+              </View>
 
-           </View>
+          </KeyboardAvoidingView>
 
           </Modal>
         </View>
@@ -150,8 +146,8 @@ const styles = StyleSheet.create({
     height: 40, 
     borderColor: 'gray', 
     borderWidth: 1, 
-    marginLeft: 50, 
-    marginRight: 50, 
+    marginLeft: 80, 
+    marginRight: 80, 
     marginBottom: 15,
     padding: 5,
     color: 'gray',
