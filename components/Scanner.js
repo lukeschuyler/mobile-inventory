@@ -3,10 +3,10 @@
 import React, { Component, PropTypes } from 'react';
 import Home from './Home'
 import Popup from './Popup'
+import styles from '../styles/ScannerStyles.js'
  
 import {
   AppRegistry,
-  StyleSheet,
   Text,
   NavigatorIOS,
   TouchableOpacity,
@@ -70,7 +70,7 @@ export default class Scanner extends Component {
         <View>
           <Modal
             animationType={"slide"}
-            transparent={true}
+            transparent={false}
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
@@ -92,6 +92,7 @@ export default class Scanner extends Component {
                   onChangeText={(qty) => this.setState({qty})}
                   value={this.state.qty}
                   style={styles.qtyInput} 
+                  keyboardType='number-pad'
                 />
               </View>
 
@@ -120,84 +121,3 @@ export default class Scanner extends Component {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  modalView: {
-    flex: 1
-  },
-  infoContainer: {
-    flex: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20
-  },
-  qtyConatiner: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  btnContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row'
-  },
-  qtyInput: { 
-    height: 40, 
-    borderColor: 'gray', 
-    borderWidth: 1, 
-    marginLeft: 80, 
-    marginRight: 80, 
-    marginBottom: 15,
-    padding: 5,
-    color: 'gray',
-    backgroundColor: 'white',
-    borderRadius: 10,
-  },
-  cancelBtn: {
-    backgroundColor: 'rgba(255,255,0,.8)',
-    height: 70,
-    width: 100,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20
-  },
-  enterBtn: {
-    backgroundColor: 'rgba(255,255,0,.8)',
-    height: 70,
-    width: 100,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20
-  },
-  productImage: {
-    height: 200,
-    width: 300,
-  },
-  navContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row'
-  },
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontSize: 21,
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 50
-  }
-});
