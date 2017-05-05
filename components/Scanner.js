@@ -2,7 +2,7 @@
  
 import React, { Component, PropTypes } from 'react';
 import Home from './Home'
-import Popup from './Popup'
+
 import styles from '../styles/ScannerStyles.js'
 import ButtonGroup from './ButtonGroup.js'
  
@@ -22,10 +22,11 @@ import {
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class Scanner extends Component {
+
   static propTypes = {
-      title: PropTypes.string,
-      navigator: PropTypes.object.isRequired
-    }
+    title: PropTypes.string,
+    navigator: PropTypes.object.isRequired
+  }
 
   state = {
     modalVisible: false,
@@ -33,6 +34,12 @@ export default class Scanner extends Component {
     sessionArray: [],
     sessionType: this.props.title,
     qty: ''
+  }
+
+  onEnter(item) {
+    this.state.sessionArray.push(item)
+    this.setModalVisible(false)
+    console.log(this.state.sessionArray)
   }
 
   setModalVisible(visible) {
@@ -45,8 +52,8 @@ export default class Scanner extends Component {
       .then(product => {
         this.setState({modalVisible: true, currentProduct: product})
       })
-      .catch(() => {
-        alert('Product Not Found!')
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -60,7 +67,14 @@ export default class Scanner extends Component {
             passProps: {
               onRead: this.onSuccess.bind(this),
               topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
-              bottomContent: <View style={styles.navContainer}><TouchableOpacity style={styles.buttonTouchable}><Text style={styles.buttonText}>Cancel</Text></TouchableOpacity><TouchableOpacity style={styles.buttonTouchable}><Text style={styles.buttonText}>Review</Text></TouchableOpacity></View>
+              bottomContent: <View style={styles.navContainer}>
+                                <TouchableOpacity style={styles.buttonTouchable}>
+                                  <Text style={styles.buttonText}>Cancel</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonTouchable}>
+                                  <Text style={styles.buttonText}>Review</Text>
+                                </TouchableOpacity>
+                              </View>
             }
           }}
           style={{flex: 1}}
@@ -75,6 +89,7 @@ export default class Scanner extends Component {
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
+           
            <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
 
             <View style={styles.infoContainer}>
@@ -83,30 +98,27 @@ export default class Scanner extends Component {
                 source={{uri: this.state.currentProduct.image}}
                 style={styles.productImage}
               />
-
             </View>
 
-              <View style={styles.qtyConatiner}>
-                <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
-                <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
-                <TextInput 
-                  onChangeText={(qty) => this.setState({qty})}
-                  value={this.state.qty}
-                  style={styles.qtyInput} 
-                  keyboardType='number-pad'
-                />
-              </View>
-
-              <ButtonGroup 
-                cancel={() => {
-                  this.setModalVisible(false)
-                }}
-                enter={() => {
-                  this.setModalVisible(true)
-                }}
-                cancelText= {'Cancel'}
-                enterText= {'Enter'}
+            <View style={styles.qtyConatiner}>
+              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
+              <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
+              <TextInput 
+                onChangeText={(qty) => this.setState({qty})}
+                value={this.state.qty}
+                style={styles.qtyInput} 
+                keyboardType={'number-pad'}
               />
+            </View>
+
+            <ButtonGroup 
+              cancel={() => {
+                this.setModalVisible(false)
+              }}
+              enter={() => { this.onEnter({quantity: this.state.qty, product_id: this.state.currentProduct.id })} } 
+              cancelText= {'Cancel'}
+              enterText= {'Enter'}
+            />
 
           </KeyboardAvoidingView>
 

@@ -13,7 +13,7 @@ const ButtonGroup = ({cancel, enter, cancelText, enterText}) =>
       <TouchableHighlight 
         style={styles.cancelBtn} 
         onPress={cancel}>
-        <Text>{cancelText}</Text>
+       <Text>{cancelText}</Text>
       </TouchableHighlight>
       <TouchableHighlight 
         style={styles.enterBtn} 
