@@ -69,7 +69,7 @@ export default class Scanner extends Component {
       return (
         <View>
           <Modal
-            animationType={"slide"}
+            animationType={'none'}
             transparent={false}
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
