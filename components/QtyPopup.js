@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Text, TouchableHighlight, View } from 'react-native';
 
-class Popup extends Component {
+class QtyPopup extends Component {
   render() {
     return (
       <View style={{marginTop: 22}}>
@@ -18,4 +18,4 @@ class Popup extends Component {
   }
 }
 
-export default Popup
+export default QtyPopup

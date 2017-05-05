@@ -2,11 +2,12 @@
  
 import React, { Component, PropTypes } from 'react';
 import Home from './Home'
-import Popup from './Popup'
+
+import styles from '../styles/ScannerStyles.js'
+import ButtonGroup from './ButtonGroup.js'
  
 import {
   AppRegistry,
-  StyleSheet,
   Text,
   NavigatorIOS,
   TouchableOpacity,
@@ -14,22 +15,52 @@ import {
   View,
   Modal,
   Image,
-  ScrollView
+  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class Scanner extends Component {
+
   static propTypes = {
-      title: PropTypes.string,
-      navigator: PropTypes.object.isRequired
+    title: PropTypes.string,
+    navigator: PropTypes.object.isRequired
+  }
+
+  componentDidMount() {
+    let sessionType;
+    if (this.props.title === 'Waste') {
+      sessionType = 'waste'
+    } else {
+      sessionType = 'inv'
     }
+    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, 
+      {
+        method: 'POST',
+        body: JSON.stringify({ username: 'lukeschuyler' })
+      })
+      .then(res => res.json())
+      .then(session => {
+         console.log(session.id)
+      }) 
+      .catch(err => {
+        console.log(err)
+      })
+  }
 
   state = {
     modalVisible: false,
     currentProduct: {},
     sessionArray: [],
     sessionType: this.props.title,
+    qty: ''
+  }
+
+  onEnter(item) {
+    this.state.sessionArray.push(item)
+    this.setModalVisible(false)
+    console.log(this.state.sessionArray)
   }
 
   setModalVisible(visible) {
@@ -42,8 +73,8 @@ export default class Scanner extends Component {
       .then(product => {
         this.setState({modalVisible: true, currentProduct: product})
       })
-      .catch(() => {
-        alert('Product Not Found!')
+      .catch((err) => {
+        console.log(err)
       })
   }
 
@@ -57,7 +88,14 @@ export default class Scanner extends Component {
             passProps: {
               onRead: this.onSuccess.bind(this),
               topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
-              bottomContent: <View style={styles.navContainer}><TouchableOpacity style={styles.buttonTouchable}><Text style={styles.buttonText}>Cancel</Text></TouchableOpacity><TouchableOpacity style={styles.buttonTouchable}><Text style={styles.buttonText}>Review</Text></TouchableOpacity></View>
+              bottomContent: <View style={styles.navContainer}>
+                                <TouchableOpacity style={styles.buttonTouchable}>
+                                  <Text style={styles.buttonText}>Cancel</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={styles.buttonTouchable}>
+                                  <Text style={styles.buttonText}>Review</Text>
+                                </TouchableOpacity>
+                              </View>
             }
           }}
           style={{flex: 1}}
@@ -67,71 +105,45 @@ export default class Scanner extends Component {
       return (
         <View>
           <Modal
-            animationType={"slide"}
-            transparent={true}
+            animationType={'none'}
+            transparent={false}
             visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
-           <View style={styles.modalView}>
-            <View>
-              <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>
+           
+           <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
+
+            <View style={styles.infoContainer}>
+              <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
               <Image
                 source={{uri: this.state.currentProduct.image}}
                 style={styles.productImage}
               />
-            <ScrollView>
-            </ScrollView>
-              <Text style={styles.textBold}>
-                {this.state.currentProduct.description}
-              </Text>
-              <TouchableHighlight onPress={() => {
-                this.setModalVisible(false)
-              }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-
             </View>
-           </View>
+
+            <View style={styles.qtyConatiner}>
+              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
+              <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
+              <TextInput 
+                onChangeText={(qty) => this.setState({qty})}
+                value={this.state.qty}
+                style={styles.qtyInput} 
+                keyboardType={'number-pad'}
+              />
+            </View>
+
+            <ButtonGroup 
+              cancel={() => { this.setModalVisible(false) } }
+              enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id })} } 
+              cancelText= {'Cancel'}
+              enterText= {'Enter'}
+            />
+
+          </KeyboardAvoidingView>
+
           </Modal>
         </View>
       )
     }
   }
 }
-
-const styles = StyleSheet.create({
-  modalView: {
-    flex: 1,
-    padding: 50,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  productImage: {
-    height: 200,
-    width: 300,
-  },
-  navContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row'
-  },
-  centerText: {
-    flex: 1,
-    fontSize: 18,
-    padding: 32,
-    color: '#777',
-  },
-  textBold: {
-    fontSize: 21,
-    fontWeight: '500',
-    color: '#000',
-  },
-  buttonText: {
-    fontSize: 21,
-    color: 'rgb(0,122,255)',
-  },
-  buttonTouchable: {
-    padding: 50
-  }
-});
