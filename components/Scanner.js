@@ -4,6 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import Home from './Home'
 import Popup from './Popup'
 import styles from '../styles/ScannerStyles.js'
+import ButtonGroup from './ButtonGroup.js'
  
 import {
   AppRegistry,
@@ -96,22 +97,16 @@ export default class Scanner extends Component {
                 />
               </View>
 
-              <View style={styles.btnContainer}>
-                <TouchableHighlight 
-                  style={styles.cancelBtn} 
-                  onPress={() => {
-                    this.setModalVisible(false)
-                  }}>
-                  <Text>Cancel</Text>
-                </TouchableHighlight>
-                <TouchableHighlight 
-                  style={styles.enterBtn} 
-                  onPress={() => {
-                    this.setModalVisible(false)
-                  }}>
-                  <Text>Enter</Text>
-                </TouchableHighlight>
-              </View>
+              <ButtonGroup 
+                cancel={() => {
+                  this.setModalVisible(false)
+                }}
+                enter={() => {
+                  this.setModalVisible(true)
+                }}
+                cancelText= {'Cancel'}
+                enterText= {'Enter'}
+              />
 
           </KeyboardAvoidingView>
 
