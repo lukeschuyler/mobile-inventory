@@ -28,6 +28,27 @@ export default class Scanner extends Component {
     navigator: PropTypes.object.isRequired
   }
 
+  componentDidMount() {
+    let sessionType;
+    if (this.props.title === 'Waste') {
+      sessionType = 'waste'
+    } else {
+      sessionType = 'inv'
+    }
+    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, 
+      {
+        method: 'POST',
+        body: JSON.stringify({ username: 'lukeschuyler' })
+      })
+      .then(res => res.json())
+      .then(session => {
+         console.log(session.id)
+      }) 
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
   state = {
     modalVisible: false,
     currentProduct: {},
@@ -112,10 +133,8 @@ export default class Scanner extends Component {
             </View>
 
             <ButtonGroup 
-              cancel={() => {
-                this.setModalVisible(false)
-              }}
-              enter={() => { this.onEnter({quantity: this.state.qty, product_id: this.state.currentProduct.id })} } 
+              cancel={() => { this.setModalVisible(false) } }
+              enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id })} } 
               cancelText= {'Cancel'}
               enterText= {'Enter'}
             />
