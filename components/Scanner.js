@@ -14,7 +14,8 @@ import {
   View,
   Modal,
   Image,
-  ScrollView
+  ScrollView,
+  TextInput
 } from 'react-native';
  
 import QRCodeScanner from 'react-native-qrcode-scanner';
@@ -30,6 +31,7 @@ export default class Scanner extends Component {
     currentProduct: {},
     sessionArray: [],
     sessionType: this.props.title,
+    qty: ''
   }
 
   setModalVisible(visible) {
@@ -75,26 +77,42 @@ export default class Scanner extends Component {
            <View style={styles.modalView}>
 
             <View style={styles.infoContainer}>
-              <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>
-              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>             
+              <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
               <Image
                 source={{uri: this.state.currentProduct.image}}
                 style={styles.productImage}
               />
               <ScrollView>
-                <Text style={styles.textBold}>
+                <Text>
                   {this.state.currentProduct.description}
                 </Text>
               </ScrollView>
             </View>
 
             <View style={styles.qtyConatiner}>
+              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
+              <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
+              <TextInput 
+                onChangeText={(qty) => this.setState({qty})}
+                value={this.state.qty}
+                style={styles.qtyInput} 
+              />
+            </View>
+
+            <View style={styles.btnContainer}>
               <TouchableHighlight 
                 style={styles.cancelBtn} 
                 onPress={() => {
                   this.setModalVisible(false)
                 }}>
                 <Text>Cancel</Text>
+              </TouchableHighlight>
+              <TouchableHighlight 
+                style={styles.enterBtn} 
+                onPress={() => {
+                  this.setModalVisible(false)
+                }}>
+                <Text>Enter</Text>
               </TouchableHighlight>
             </View>
 
@@ -112,7 +130,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   infoContainer: {
-    flex: 2,
+    flex: 4,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20
@@ -120,8 +138,43 @@ const styles = StyleSheet.create({
   qtyConatiner: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center'
+  },
+  btnContainer: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row'
+  },
+  qtyInput: { 
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1, 
+    marginLeft: 50, 
+    marginRight: 50, 
+    marginBottom: 15,
+    padding: 5,
+    color: 'gray',
+    backgroundColor: 'white',
+    borderRadius: 10,
+  },
+  cancelBtn: {
+    backgroundColor: 'rgba(255,255,0,.8)',
+    height: 70,
+    width: 100,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20
+  },
+  enterBtn: {
+    backgroundColor: 'rgba(255,255,0,.8)',
+    height: 70,
+    width: 100,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20
   },
   productImage: {
     height: 200,
