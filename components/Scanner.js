@@ -28,6 +28,14 @@ export default class Scanner extends Component {
     navigator: PropTypes.object.isRequired
   }
 
+  state = {
+    modalVisible: false,
+    currentProduct: {},
+    sessionArray: [],
+    session_id: '',
+    qty: ''
+  }
+
   componentDidMount() {
     let sessionType;
     if (this.props.title === 'Waste') {
@@ -42,24 +50,17 @@ export default class Scanner extends Component {
       })
       .then(res => res.json())
       .then(session => {
-         console.log(session.id)
+         this.setState({session_id: session.id})
       }) 
       .catch(err => {
         console.log(err)
       })
   }
 
-  state = {
-    modalVisible: false,
-    currentProduct: {},
-    sessionArray: [],
-    sessionType: this.props.title,
-    qty: ''
-  }
-
   onEnter(item) {
     this.state.sessionArray.push(item)
     this.setModalVisible(false)
+    this.setState({qty: ''})
     console.log(this.state.sessionArray)
   }
 
@@ -72,10 +73,24 @@ export default class Scanner extends Component {
       .then(res => res.json())
       .then(product => {
         this.setState({modalVisible: true, currentProduct: product})
+        this.refs.TextInput.focus()
       })
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  onCancel() {
+    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions/${this.state.session_id}`, 
+      {
+        method: 'DELETE'
+      })
+    .then(() => {
+      this.props.navigator.push({
+        component: Home,
+        title: 'Home'
+      })
+    })
   }
 
   render() {
@@ -103,13 +118,6 @@ export default class Scanner extends Component {
       )   
     }  else {
       return (
-        <View>
-          <Modal
-            animationType={'none'}
-            transparent={false}
-            visible={this.state.modalVisible}
-            onRequestClose={() => {alert("Modal has been closed.")}}
-            >
            
            <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
 
@@ -129,20 +137,21 @@ export default class Scanner extends Component {
                 value={this.state.qty}
                 style={styles.qtyInput} 
                 keyboardType={'number-pad'}
+                autoFocus={true}
+                ref='TextInput'
               />
             </View>
 
             <ButtonGroup 
               cancel={() => { this.setModalVisible(false) } }
-              enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id })} } 
+              enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id, session_id: +(this.state.session_id) })} } 
               cancelText= {'Cancel'}
               enterText= {'Enter'}
             />
 
           </KeyboardAvoidingView>
 
-          </Modal>
-        </View>
+
       )
     }
   }
