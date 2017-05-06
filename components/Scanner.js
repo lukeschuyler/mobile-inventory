@@ -23,23 +23,30 @@ import QRCodeScanner from 'react-native-qrcode-scanner';
 
 export default class Scanner extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      currentProduct: {},
+      sessionArray: [],
+      session_id: '',
+      qty: '',
+      sessionType: this.props.route.title
+    }
+    console.log(this.state.sessionType)
+    this.onCancel = this.onCancel.bind(this)
+  }
+
   static propTypes = {
-    title: PropTypes.string,
+    route: PropTypes.object.isRequired,
     navigator: PropTypes.object.isRequired
   }
 
-  state = {
-    modalVisible: false,
-    currentProduct: {},
-    sessionArray: [],
-    session_id: '',
-    qty: ''
-  }
-
   componentDidMount() {
-    let sessionType;
-    if (this.props.title === 'Waste') {
+   let sessionType;
+    if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
+
     } else {
       sessionType = 'inv'
     }
@@ -51,6 +58,7 @@ export default class Scanner extends Component {
       .then(res => res.json())
       .then(session => {
          this.setState({session_id: session.id})
+         console.log(session)
       }) 
       .catch(err => {
         console.log(err)
@@ -81,6 +89,13 @@ export default class Scanner extends Component {
   }
 
   onCancel() {
+    let sessionType;
+     console.log(this.state)
+    if (this.state.sessionType === 'Waste') {
+      sessionType = 'waste'
+    } else {
+      sessionType = 'inv'
+    }
     fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions/${this.state.session_id}`, 
       {
         method: 'DELETE'
@@ -91,6 +106,13 @@ export default class Scanner extends Component {
         title: 'Home'
       })
     })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  onReview(array) {
+    console.log(array)
   }
 
   render() {
@@ -104,10 +126,10 @@ export default class Scanner extends Component {
               onRead: this.onSuccess.bind(this),
               topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
               bottomContent: <View style={styles.navContainer}>
-                                <TouchableOpacity style={styles.buttonTouchable}>
+                                <TouchableOpacity onPress={this.onCancel} style={styles.buttonTouchable}>
                                   <Text style={styles.buttonText}>Cancel</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={styles.buttonTouchable}>
+                                <TouchableOpacity onPress={() => {this.onReview(this.state.sessionArray)} } style={styles.buttonTouchable}>
                                   <Text style={styles.buttonText}>Review</Text>
                                 </TouchableOpacity>
                               </View>
@@ -118,39 +140,33 @@ export default class Scanner extends Component {
       )   
     }  else {
       return (
-           
-           <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
-
-            <View style={styles.infoContainer}>
-              <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
-              <Image
-                source={{uri: this.state.currentProduct.image}}
-                style={styles.productImage}
-              />
-            </View>
-
-            <View style={styles.qtyConatiner}>
-              <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
-              <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
-              <TextInput 
-                onChangeText={(qty) => this.setState({qty})}
-                value={this.state.qty}
-                style={styles.qtyInput} 
-                keyboardType={'number-pad'}
-                autoFocus={true}
-                ref='TextInput'
-              />
-            </View>
-
-            <ButtonGroup 
-              cancel={() => { this.setModalVisible(false) } }
-              enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id, session_id: +(this.state.session_id) })} } 
-              cancelText= {'Cancel'}
-              enterText= {'Enter'}
+         <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
+          <View style={styles.infoContainer}>
+            <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
+            <Image
+              source={{uri: this.state.currentProduct.image}}
+              style={styles.productImage}
             />
-
-          </KeyboardAvoidingView>
-
+          </View>
+          <View style={styles.qtyConatiner}>
+            <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
+            <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
+            <TextInput 
+              onChangeText={(qty) => this.setState({qty})}
+              value={this.state.qty}
+              style={styles.qtyInput} 
+              keyboardType={'number-pad'}
+              autoFocus={true}
+              ref='TextInput'
+            />
+          </View>
+          <ButtonGroup 
+            cancel={() => { this.setModalVisible(false) } }
+            enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id, session_id: +(this.state.session_id) })} } 
+            cancelText= {'Cancel'}
+            enterText= {'Enter'}
+          />
+        </KeyboardAvoidingView>
 
       )
     }
