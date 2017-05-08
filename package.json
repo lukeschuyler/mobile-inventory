@@ -11,7 +11,8 @@
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.0",
     "react-native-camera": "^0.7.0",
-    "react-native-qrcode-scanner": "0.0.9"
+    "react-native-qrcode-scanner": "0.0.9",
+    "react-numeric-input": "^2.0.7"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

@@ -78,6 +78,35 @@ const styles = StyleSheet.create({
   },
   buttonTouchable: {
     padding: 50
+  },
+  reviewSection: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  reviewHeader: {
+    flex: .5,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  reviewScroll: {
+    flex: 5,
+    alignItems: 'center'
+  },
+  reviewItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  reviewInput: {
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1, 
+    width: 90,
+    marginBottom: 15,
+    padding: 5,
+    color: 'gray',
+    backgroundColor: 'white',
+    borderRadius: 10,
   }
 });
 
