@@ -5,6 +5,7 @@ import Home from './Home'
 
 import styles from '../styles/ScannerStyles.js'
 import ButtonGroup from './ButtonGroup.js'
+import Review from './Review.js'
  
 import {
   AppRegistry,
@@ -27,14 +28,15 @@ export default class Scanner extends Component {
     super(props);
     this.state = {
       modalVisible: false,
+      review: false,
       currentProduct: {},
       sessionArray: [],
       session_id: '',
       qty: '',
       sessionType: this.props.route.title
     }
-    console.log(this.state.sessionType)
     this.onCancel = this.onCancel.bind(this)
+    this.onReview = this.onReview.bind(this)
   }
 
   static propTypes = {
@@ -88,9 +90,10 @@ export default class Scanner extends Component {
       })
   }
 
+  // GO BACK TO HOME
+
   onCancel() {
     let sessionType;
-     console.log(this.state)
     if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
     } else {
@@ -111,12 +114,14 @@ export default class Scanner extends Component {
     })
   }
 
-  onReview(array) {
-    console.log(array)
+  onReview() {
+    this.setState({review: true})
   }
 
+  // RENDER
+
   render() {
-    if (!this.state.modalVisible) {
+    if (!this.state.modalVisible && !this.state.review) {
        return (
         <NavigatorIOS
           initialRoute={{
@@ -129,7 +134,7 @@ export default class Scanner extends Component {
                                 <TouchableOpacity onPress={this.onCancel} style={styles.buttonTouchable}>
                                   <Text style={styles.buttonText}>Cancel</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => {this.onReview(this.state.sessionArray)} } style={styles.buttonTouchable}>
+                                <TouchableOpacity onPress={() => {this.onReview()} } style={styles.buttonTouchable}>
                                   <Text style={styles.buttonText}>Review</Text>
                                 </TouchableOpacity>
                               </View>
@@ -138,8 +143,15 @@ export default class Scanner extends Component {
           style={{flex: 1}}
         />
       )   
-    }  else {
+    }  else if (this.state.modalVisible) {
       return (
+        <View>
+          <Modal
+            animationType={'none'}
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {alert("Modal has been closed.")}}
+            >
          <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
           <View style={styles.infoContainer}>
             <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
@@ -162,12 +174,25 @@ export default class Scanner extends Component {
           </View>
           <ButtonGroup 
             cancel={() => { this.setModalVisible(false) } }
-            enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id, session_id: +(this.state.session_id) })} } 
+            enter={() => { this.onEnter({
+                            quantity: +(this.state.qty), 
+                            product_id: this.state.currentProduct.id, 
+                            session_id: +(this.state.session_id),
+                            name: this.state.currentProduct.name,
+                            upc_code: this.state.currentProduct.upc_code }
+                          )}} 
             cancelText= {'Cancel'}
             enterText= {'Enter'}
           />
-        </KeyboardAvoidingView>
-
+        </KeyboardAvoidingView> 
+      </Modal>
+    </View>
+      )
+    } else {
+      return (
+        <Review 
+          itemArray={this.state.sessionArray}
+        />
       )
     }
   }

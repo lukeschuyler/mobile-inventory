@@ -78,6 +78,9 @@ const styles = StyleSheet.create({
   },
   buttonTouchable: {
     padding: 50
+  },
+  review: {
+    
   }
 });
 
