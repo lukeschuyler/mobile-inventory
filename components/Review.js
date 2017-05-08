@@ -2,6 +2,7 @@
  
 import React, { Component, PropTypes } from 'react';
 import Home from './Home'
+import ButtonGroup from './ButtonGroup.js'
 
 import { 
   View,
@@ -16,12 +17,18 @@ import ButtonGroup from './ButtonGroup.js'
 const Review = ({ itemArray }) =>
     (
       <View style={styles.reviewSection}>
-        <Text>Review Selection</Text>
-        <ScrollView>  
+        <View style={styles.reviewHeader}><Text>Review Selection</Text></View>
+        <ScrollView style={styles.reviewScroll}>  
           {itemArray.map((item, i)=> {
-            return <Text key={i}>{itemArray.name}</Text>
+            return <Text key={i}>Test</Text>
           })}
         </ScrollView>
+        <ButtonGroup 
+          cancel={}
+          enter={} 
+          cancelText= {'Cancel'}
+          enterText= {'Enter'}
+        />
       </View>
     )
 

@@ -80,7 +80,17 @@ const styles = StyleSheet.create({
     padding: 50
   },
   review: {
-    
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  reviewHeader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  reviewScroll: {
+    flex: 5
   }
 });
 

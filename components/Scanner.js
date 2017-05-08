@@ -115,6 +115,7 @@ export default class Scanner extends Component {
   }
 
   onReview() {
+    console.log(this.state.sessionArray)
     this.setState({review: true})
   }
 
@@ -190,9 +191,16 @@ export default class Scanner extends Component {
       )
     } else {
       return (
+      <Modal
+        animationType={'slide'}
+        transparent={false}
+        visible={this.state.review}
+        onRequestClose={() => {alert("Modal has been closed.")}}
+        >
         <Review 
           itemArray={this.state.sessionArray}
         />
+      </Modal>
       )
     }
   }
