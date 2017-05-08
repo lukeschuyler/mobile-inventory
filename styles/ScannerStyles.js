@@ -94,7 +94,8 @@ const styles = StyleSheet.create({
   },
   reviewItem: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around',
+    alignItems: 'center'
   },
   reviewInput: {
     height: 40, 

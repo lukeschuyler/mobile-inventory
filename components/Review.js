@@ -14,7 +14,7 @@ import {
 
 import styles from '../styles/ScannerStyles.js'
 
-const Review = ({ itemArray, backToScan, upload }) =>
+const Review = ({ itemArray, backToScan, upload }) => 
     (
       <View style={styles.reviewSection}>
         <View style={styles.reviewHeader}><Text>Review Selection</Text></View>

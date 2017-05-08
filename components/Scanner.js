@@ -37,6 +37,7 @@ export default class Scanner extends Component {
     }
     this.onCancel = this.onCancel.bind(this)
     this.onReview = this.onReview.bind(this)
+    this.upload = this.upload.bind(this)
   }
 
   static propTypes = {
@@ -45,10 +46,9 @@ export default class Scanner extends Component {
   }
 
   componentDidMount() {
-   let sessionType;
+    let sessionType;
     if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
-
     } else {
       sessionType = 'inv'
     }
@@ -119,7 +119,27 @@ export default class Scanner extends Component {
   }
 
   upload() {
-    console.log(this.state.sessionArray)
+    let sessionType;
+    let sessionKey;
+    if (this.state.sessionType === 'Waste') {
+      sessionType = 'waste'
+      sessionKey = 'waste_session_id'
+    } else {
+      sessionType = 'inv'
+      sessionKey = 'inventory_session_id'
+    }
+    Promise.all(this.state.sessionArray.map(item => {
+    const data = { product_id: +item.product_id, [sessionKey]: +item.session_id, quantity: +item.quantity }
+    console.log(data)
+     return fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, 
+      {
+        method: 'POST',
+        body: JSON.stringify(data)
+      }).then(res => res.json())
+    }))
+    .then((res) => {
+      console.log(res)
+    })
   }
 
   // RENDER
