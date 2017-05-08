@@ -92,8 +92,20 @@ const styles = StyleSheet.create({
     flex: 5,
     alignItems: 'center'
   },
+  reviewItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
   reviewInput: {
-    width: 50
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1, 
+    width: 90,
+    marginBottom: 15,
+    padding: 5,
+    color: 'gray',
+    backgroundColor: 'white',
+    borderRadius: 10,
   }
 });
 

@@ -17,18 +17,21 @@ class ReviewItem extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      qty: this.props.qty
+      qty: +this.props.qty
     }
   }
+
   render() {
     return  (
-      <View style={styles.reviewSection}>
+      <View style={styles.reviewItem}>
        <Text>{this.props.name}</Text>
         <TextInput
           onChangeText={(qty) => { this.setState({qty}) }}
-          value={this.state.qty}
+          value={+this.state.qty}
           style={styles.reviewInput} 
           autoFocus={false}
+          keyboardType={'number-pad'}
+          defaultValue={+this.state.qty}
         />
       </View>
     )

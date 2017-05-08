@@ -13,8 +13,6 @@ import {
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
-  
-
 
 const Review = ({ itemArray, backToScan, upload }) =>
     (
@@ -26,7 +24,7 @@ const Review = ({ itemArray, backToScan, upload }) =>
               <ReviewItem 
                 key={i}
                 name={item.name}
-                qty={item.qty}
+                qty={item.quantity}
               />
             )}
           </ScrollView>
@@ -39,32 +37,5 @@ const Review = ({ itemArray, backToScan, upload }) =>
         />
       </View>
     )
-
-// const Review = ({ itemArray, upload, backToScan, editQty }) =>
-//     (
-//       <View style={styles.reviewSection}>
-//         <View style={styles.reviewHeader}><Text>Review Selection</Text></View>
-//         <View style={styles.reviewScroll}>
-//           <ScrollView>  
-//             {itemArray.map((item, i) => 
-//              <Text key={i}>{item.name}</Text>
-//               <TextInput
-//                 onChangeText={}
-//                 value={item.qty}
-//                 style={styles.reviewInput} 
-//                 autoFocus={false}
-//                 ref='TextInput'
-//               />
-//             )}
-//           </ScrollView>
-//         </View>
-//         <ButtonGroup 
-//           cancel={backToScan}
-//           enter={upload} 
-//           cancelText= {'Cancel'}
-//           enterText= {'Upload'}
-//         />
-//       </View>
-//     )
 
 export default Review
