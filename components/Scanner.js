@@ -6,6 +6,7 @@ import Home from './Home'
 import styles from '../styles/ScannerStyles.js'
 import ButtonGroup from './ButtonGroup.js'
 import Review from './Review.js'
+import axios from 'axios'
  
 import {
   AppRegistry,
@@ -52,14 +53,9 @@ export default class Scanner extends Component {
     } else {
       sessionType = 'inv'
     }
-    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, 
-      {
-        method: 'POST',
-        body: JSON.stringify({ username: 'lukeschuyler' })
-      })
-      .then(res => res.json())
+    axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, { username: 'lukeschuyler' })
       .then(session => {
-         this.setState({session_id: session.id})
+         this.setState({session_id: session.data.id})
          console.log(session)
       }) 
       .catch(err => {
@@ -79,10 +75,9 @@ export default class Scanner extends Component {
   }
 
   onSuccess(e) {
-    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
-      .then(res => res.json())
+    axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
-        this.setState({modalVisible: true, currentProduct: product})
+        this.setState({modalVisible: true, currentProduct: product.data})
         this.refs.TextInput.focus()
       })
       .catch((err) => {
@@ -99,10 +94,7 @@ export default class Scanner extends Component {
     } else {
       sessionType = 'inv'
     }
-    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions/${this.state.session_id}`, 
-      {
-        method: 'DELETE'
-      })
+    axios.delete(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions/${this.state.session_id}`)
     .then(() => {
       this.props.navigator.push({
         component: Home,
@@ -129,17 +121,16 @@ export default class Scanner extends Component {
       sessionKey = 'inventory_session_id'
     }
     Promise.all(this.state.sessionArray.map(item => {
-    const data = { product_id: +item.product_id, [sessionKey]: +item.session_id, quantity: +item.quantity }
-    console.log(data)
-     return fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, 
-      {
-        method: 'POST',
-        body: JSON.stringify(data)
-      }).then(res => res.json())
+      const data = { product_id: +item.product_id, [sessionKey]: +item.session_id, quantity: +item.quantity }
+      console.log('data: ', data)
+     return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
+       .then((res) => {
+          console.log(res)
+        })
+       .catch(err => {
+        alert('Something happened! Please try again')
+       })
     }))
-    .then((res) => {
-      console.log(res)
-    })
   }
 
   // RENDER

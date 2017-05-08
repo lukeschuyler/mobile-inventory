@@ -24,7 +24,7 @@ const Review = ({ itemArray, backToScan, upload }) =>
               <ReviewItem 
                 key={i}
                 name={item.name}
-                qty={item.quantity}
+                qty={+item.quantity}
               />
             )}
           </ScrollView>
