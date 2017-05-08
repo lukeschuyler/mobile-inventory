@@ -24,6 +24,7 @@ const Review = ({ itemArray, backToScan, upload }) =>
           <ScrollView>  
             {itemArray.map((item, i) => 
               <ReviewItem 
+                key={i}
                 name={item.name}
                 qty={item.qty}
               />

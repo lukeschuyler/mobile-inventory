@@ -23,7 +23,7 @@ class ReviewItem extends Component {
   render() {
     return  (
       <View style={styles.reviewSection}>
-       <Text key={i}>{this.props.name}</Text>
+       <Text>{this.props.name}</Text>
         <TextInput
           onChangeText={(qty) => { this.setState({qty}) }}
           value={this.state.qty}
