@@ -79,18 +79,21 @@ const styles = StyleSheet.create({
   buttonTouchable: {
     padding: 50
   },
-  review: {
+  reviewSection: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
   },
   reviewHeader: {
-    flex: 1,
+    flex: .5,
     justifyContent: 'center',
     alignItems: 'center'
   },
   reviewScroll: {
-    flex: 5
+    flex: 5,
+    alignItems: 'center'
+  },
+  reviewInput: {
+    width: 50
   }
 });
 

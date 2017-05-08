@@ -115,8 +115,11 @@ export default class Scanner extends Component {
   }
 
   onReview() {
-    console.log(this.state.sessionArray)
     this.setState({review: true})
+  }
+
+  upload() {
+    console.log(this.state.sessionArray)
   }
 
   // RENDER
@@ -199,6 +202,8 @@ export default class Scanner extends Component {
         >
         <Review 
           itemArray={this.state.sessionArray}
+          upload={this.upload}
+          backToScan={()=> { this.setState({ review: false }) }}
         />
       </Modal>
       )

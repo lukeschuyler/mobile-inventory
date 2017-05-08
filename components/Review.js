@@ -3,6 +3,7 @@
 import React, { Component, PropTypes } from 'react';
 import Home from './Home'
 import ButtonGroup from './ButtonGroup.js'
+import ReviewItem from './ReviewItem.js'
 
 import { 
   View,
@@ -12,24 +13,57 @@ import {
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
-import ButtonGroup from './ButtonGroup.js'
+  
 
-const Review = ({ itemArray }) =>
+
+const Review = ({ itemArray, backToScan, upload }) =>
     (
       <View style={styles.reviewSection}>
         <View style={styles.reviewHeader}><Text>Review Selection</Text></View>
-        <ScrollView style={styles.reviewScroll}>  
-          {itemArray.map((item, i)=> {
-            return <Text key={i}>Test</Text>
-          })}
-        </ScrollView>
+        <View style={styles.reviewScroll}>
+          <ScrollView>  
+            {itemArray.map((item, i) => 
+              <ReviewItem 
+                name={item.name}
+                qty={item.qty}
+              />
+            )}
+          </ScrollView>
+        </View>
         <ButtonGroup 
-          cancel={}
-          enter={} 
+          cancel={backToScan}
+          enter={upload} 
           cancelText= {'Cancel'}
-          enterText= {'Enter'}
+          enterText= {'Upload'}
         />
       </View>
     )
+
+// const Review = ({ itemArray, upload, backToScan, editQty }) =>
+//     (
+//       <View style={styles.reviewSection}>
+//         <View style={styles.reviewHeader}><Text>Review Selection</Text></View>
+//         <View style={styles.reviewScroll}>
+//           <ScrollView>  
+//             {itemArray.map((item, i) => 
+//              <Text key={i}>{item.name}</Text>
+//               <TextInput
+//                 onChangeText={}
+//                 value={item.qty}
+//                 style={styles.reviewInput} 
+//                 autoFocus={false}
+//                 ref='TextInput'
+//               />
+//             )}
+//           </ScrollView>
+//         </View>
+//         <ButtonGroup 
+//           cancel={backToScan}
+//           enter={upload} 
+//           cancelText= {'Cancel'}
+//           enterText= {'Upload'}
+//         />
+//       </View>
+//     )
 
 export default Review
