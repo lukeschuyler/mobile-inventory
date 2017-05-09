@@ -132,7 +132,7 @@ export default class Scanner extends Component {
                   onChangeText={(qty) => this.setState({qty})}
                   value={this.state.qty}
                   style={styles.qtyInput} 
-                  keyboardType={'number-pad'}
+                  keyboardType={'numeric'}
                   autoFocus={true}
                   ref='TextInput'
                 />

@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 5
   },
   reviewItem: {
-    flex: 1,
+    flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 1,
