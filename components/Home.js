@@ -21,14 +21,18 @@ export default class Home extends Component {
   _onForwardWaste = () => {
     this.props.navigator.push({
       component: Scanner,
-      title: 'Waste'
+      title: 'Waste',
+      passProps: { sessionArray: [] },
+      navigationBarHidden: true
     });
   }
 
   _onForwardInv = () => {
     this.props.navigator.push({
       component: Scanner,
-      title: 'Inventory'
+      title: 'Inventory',
+      passProps: { sessionArray: [] },
+      navigationBarHidden: true
     });
   }
 
