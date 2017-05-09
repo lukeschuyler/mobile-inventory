@@ -99,7 +99,9 @@ const styles = StyleSheet.create({
     marginLeft: 20, 
     marginRight: 20,
     borderColor: 'gray', 
-    padding: 5
+    padding: 5,
+    margin: 10,
+    borderRadius: 10
   },
   reviewInput: {
     height: 40, 

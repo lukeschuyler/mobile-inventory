@@ -25,6 +25,7 @@ class Review extends Component {
     }
     this.upload = this.upload.bind(this)
     this.onCancel = this.onCancel.bind(this)
+    this.editQty = this.editQty.bind(this)
   }
 
   static propTypes = {
@@ -32,6 +33,19 @@ class Review extends Component {
     navigator: PropTypes.object.isRequired
   }
 
+  editQty(qty, index) {
+    let itemArray = this.state.itemArray
+    const newArray = itemArray.map((item, i) => {
+      if (i == index) {
+        item.quantity = qty
+      }
+      return item
+    })
+    this.setState({
+      itemArray: newArray
+    })
+    console.log(this.state.itemArray)
+  }
 
   onCancel() {
     this.props.navigator.pop()
@@ -98,6 +112,7 @@ class Review extends Component {
                   measure={item.measure}
                   itemArray={this.state.itemArray}
                   index={i}
+                  editQty={this.editQty}
                 />
               )}
             </ScrollView>
