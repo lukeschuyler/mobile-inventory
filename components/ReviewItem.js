@@ -37,8 +37,10 @@ class ReviewItem extends Component {
     if(this.state.editing) {
       return  (
         <View style={styles.reviewItem}>
-         <Text>{this.props.name}</Text>
-         <Text>{this.props.code}</Text>
+          <View style={styles.itemLabel}>
+           <Text >{this.props.name}</Text>
+           <Text >{this.props.code}</Text>
+          </View>
           <TextInput
             onChangeText={(qty) => { this.setState({qty}) }}
             value={this.state.qty.toString()}
@@ -53,8 +55,10 @@ class ReviewItem extends Component {
     } else {
       return (
         <View style={styles.reviewItem}>
-           <Text>{this.props.name}</Text>
-           <Text>{this.props.code}</Text>
+          <View style={styles.itemLabel}>
+           <Text >{this.props.name}</Text>
+           <Text >{this.props.code}</Text>
+          </View>
            <TouchableHighlight onPress={this.edit}><Text>{this.state.qty}</Text></TouchableHighlight>
         </View>        
       )

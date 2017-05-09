@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
     color: '#111'
   },
   itemLabel: {
-
+    flex: 1,
+    justifyContent: 'center'
   }
 });
 
