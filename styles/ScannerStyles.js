@@ -71,10 +71,12 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: '500',
     color: '#000',
+    fontFamily: 'Avenir-Medium'
   },
   buttonText: {
     fontSize: 21,
     color: 'rgb(0,122,255)',
+    fontFamily: 'Avenir-Medium'
   },
   buttonTouchable: {
     padding: 50
@@ -112,9 +114,10 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   },
   reviewHeader: {
-    fontSize: 40,
-    fontWeight: '700',
-    color: '#111'
+    fontSize: 25,
+    fontWeight: '500',
+    color: '#333',
+    fontFamily: 'Avenir-Medium',
   },
   itemLabel: {
     flex: 1,

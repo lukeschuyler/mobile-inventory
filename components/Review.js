@@ -6,6 +6,7 @@ import ButtonGroup from './ButtonGroup.js'
 import axios from 'axios'
 import ReviewItem from './ReviewItem.js'
 import Spinner from 'react-native-loading-spinner-overlay';
+import Toast from 'react-native-simple-toast';
 
 import { 
   View,
@@ -85,7 +86,7 @@ class Review extends Component {
        const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
-          console.log(res) 
+          Toast.show('Session uploaded successfully');
             this.props.navigator.popToTop() 
           })
          .catch(err => {

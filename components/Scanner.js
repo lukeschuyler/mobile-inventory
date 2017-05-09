@@ -95,7 +95,7 @@ export default class Scanner extends Component {
             title: 'Scanner',
             passProps: {
               onRead: this.onSuccess.bind(this),
-              topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
+              topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan {this.state.sessionType} Item</Text> </Text>,
               bottomContent: <View style={styles.navContainer}>
                                 <TouchableOpacity onPress={this.onCancel} style={styles.buttonTouchable}>
                                   <Text style={styles.buttonText}>Cancel</Text>
