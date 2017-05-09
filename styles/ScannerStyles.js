@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     flex: .5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 30
   },
   reviewScroll: {
     flex: 5
@@ -114,15 +114,20 @@ const styles = StyleSheet.create({
     paddingLeft: 5
   },
   reviewHeader: {
-    fontSize: 25,
-    fontWeight: '500',
+    fontSize: 20,
+    fontWeight: '300',
     color: '#333',
     fontFamily: 'Avenir-Medium',
   },
   itemLabel: {
     flex: 1,
     justifyContent: 'center'
-  }
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
 });
 
 export default styles;

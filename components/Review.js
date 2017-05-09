@@ -5,13 +5,13 @@ import Home from './Home'
 import ButtonGroup from './ButtonGroup.js'
 import axios from 'axios'
 import ReviewItem from './ReviewItem.js'
-import Spinner from 'react-native-loading-spinner-overlay';
 import Toast from 'react-native-simple-toast';
 
 import { 
   View,
   Text,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
@@ -86,8 +86,10 @@ class Review extends Component {
        const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
-          Toast.show('Session uploaded successfully');
+          setTimeout(() => {
+            Toast.show('Session uploaded successfully');
             this.props.navigator.popToTop() 
+            }, 1500)
           })
          .catch(err => {
           alert('Something happened! Please try again')
@@ -128,8 +130,12 @@ class Review extends Component {
       )
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <Spinner visible={this.state.visible} textContent={"Uploading Session..."} textStyle={{color: '#FFF'}} />
+        <View style={[styles.centering, { flex: 1 }]}>
+          <ActivityIndicator
+            animating={this.state.loading}
+            style={{height: 80}]}
+            size="large"
+          />
         </View>
       )
     }
