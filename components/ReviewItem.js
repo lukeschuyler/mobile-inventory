@@ -60,7 +60,7 @@ class ReviewItem extends Component {
            <Text >{this.props.name}</Text>
            <Text >{this.props.code}</Text>
           </View>
-           <TouchableHighlight onPress={this.edit}><Text>{this.props.measure}: {this.state.qty}</Text></TouchableHighlight>
+          <TouchableHighlight onPress={this.edit}><Text>{this.props.measure}: {this.state.qty}</Text></TouchableHighlight>
         </View>        
       )
     }
