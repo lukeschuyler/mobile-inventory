@@ -41,6 +41,7 @@ class ReviewItem extends Component {
            <Text >{this.props.name}</Text>
            <Text >{this.props.code}</Text>
           </View>
+          <Text>{this.props.measure}: </Text>
           <TextInput
             onChangeText={(qty) => { this.setState({qty}) }}
             value={this.state.qty.toString()}
@@ -59,7 +60,7 @@ class ReviewItem extends Component {
            <Text >{this.props.name}</Text>
            <Text >{this.props.code}</Text>
           </View>
-           <TouchableHighlight onPress={this.edit}><Text>{this.state.qty}</Text></TouchableHighlight>
+           <TouchableHighlight onPress={this.edit}><Text>{this.props.measure}: {this.state.qty}</Text></TouchableHighlight>
         </View>        
       )
     }

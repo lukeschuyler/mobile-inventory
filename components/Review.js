@@ -25,6 +25,7 @@ const Review = ({ itemArray, backToScan, upload }) =>
                 name={item.name}
                 qty={+item.quantity}
                 code={+item.upc_code}
+                measure={item.measure}
               />
             )}
           </ScrollView>

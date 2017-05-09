@@ -190,6 +190,7 @@ export default class Scanner extends Component {
               <ButtonGroup 
                 cancel={() => { this.setModalVisible(false) } }
                 enter={() => { this.onEnter({
+                                measure: this.state.currentProduct.measure,
                                 quantity: +(this.state.qty), 
                                 product_id: this.state.currentProduct.id, 
                                 session_id: +(this.state.session_id),
