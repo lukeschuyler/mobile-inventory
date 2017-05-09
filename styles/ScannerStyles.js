@@ -80,33 +80,35 @@ const styles = StyleSheet.create({
     padding: 50
   },
   reviewSection: {
-    flex: 1,
-    justifyContent: 'center',
+    flex: 1
   },
-  reviewHeader: {
+  reviewHeaderContainer: {
     flex: .5,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 20
   },
   reviewScroll: {
-    flex: 5,
-    alignItems: 'center'
+    flex: 5
   },
   reviewItem: {
+    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center'
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    marginLeft: 20, 
+    marginRight: 20
   },
   reviewInput: {
     height: 40, 
     borderColor: 'gray', 
     borderWidth: 1, 
-    width: 90,
-    marginBottom: 15,
-    padding: 5,
-    color: 'gray',
-    backgroundColor: 'white',
-    borderRadius: 10,
+    width: 60,
+  },
+  reviewHeader: {
+    fontSize: 40,
+    fontWeight: '700',
+    color: '#111'
   }
 });
 

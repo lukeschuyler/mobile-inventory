@@ -8,8 +8,7 @@ import ReviewItem from './ReviewItem.js'
 import { 
   View,
   Text,
-  ScrollView,
-  ListView
+  ScrollView
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
@@ -17,7 +16,7 @@ import styles from '../styles/ScannerStyles.js'
 const Review = ({ itemArray, backToScan, upload }) => 
     (
       <View style={styles.reviewSection}>
-        <View style={styles.reviewHeader}><Text>Review Selection</Text></View>
+        <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Review Selection</Text></View>
         <View style={styles.reviewScroll}>
           <ScrollView>  
             {itemArray.map((item, i) => 
