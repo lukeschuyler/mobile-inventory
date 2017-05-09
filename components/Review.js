@@ -21,15 +21,11 @@ class Review extends Component {
     this.state = {
       itemArray: this.props.itemArray,
       sessionType: this.props.sessionType,
-      loading: false
+      loading: false,
+      goHome: this.props.goHome
     }
     this.upload = this.upload.bind(this)
   }
-
-  static propTypes = {
-      title: PropTypes.string,
-      navigator: PropTypes.object.isRequired
-    }
 
   postSession() {
     let sessionType;
@@ -65,10 +61,8 @@ class Review extends Component {
        const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
-            this.props.navigator.push({
-              component: Home,
-              title: 'Home'
-            });            
+          console.log(res)
+            this.state.goHome()           
           })
          .catch(err => {
           alert('Something happened! Please try again')

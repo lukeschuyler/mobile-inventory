@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   productImage: {
-    height: 200,
+    height: 100,
     width: 300,
   },
   navContainer: {
