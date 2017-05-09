@@ -2,6 +2,8 @@
  
 import React, { Component, PropTypes } from 'react';
 import Home from './Home'
+import ButtonGroup from './ButtonGroup.js'
+import Review from './Review.js'
 
 import { 
   KeyboardAvoidingView, 
@@ -12,48 +14,24 @@ import {
   View 
 } from 'react-native';
 
+import styles from '../styles/ScannerStyles.js'
 
-class QtyPopup extends Component {
-  
-  static propTypes = {
-    sessionArray: PropTypes.array.isRequired,
-    sessionId: PropTypes.number.isRequired.
-    UPC: PropTypes.number.isRequired
-  }
+const QtyPopup = ({ image, name, code, measure, qty, hideModal, pushItem, onChangeQty }) =>
 
-  state = {
-    modalVisible: false,
-  }
-
-  componentDidMount = {
-    fetch(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${this.props.UPC}`)
-      .then(res => res.json())
-      .then(product => {
-        this.setState({modalVisible: true, currentProduct: product})
-        this.refs.TextInput.focus()
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
-
- render() {
     (
        <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
-
         <View style={styles.infoContainer}>
-          <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
+          <Text style={styles.textBold}>{name}</Text>           
           <Image
-            source={{uri: this.state.currentProduct.image}}
+            source={{uri: image}}
             style={styles.productImage}
           />
         </View>
-
         <View style={styles.qtyConatiner}>
-          <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
-          <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
+          <Text style={styles.textBold}>UPC: {code}</Text>  
+          <Text style={styles.textBold}>Enter {measure}: </Text>
           <TextInput 
-            onChangeText={}
+            onChangeText={onChangeQty}
             value={qty}
             style={styles.qtyInput} 
             keyboardType={'number-pad'}
@@ -61,76 +39,23 @@ class QtyPopup extends Component {
             ref='TextInput'
           />
         </View>
-
         <ButtonGroup 
-          cancel={() => { this.setModalVisible(false) } }
-          enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id, session_id: +(this.state.session_id) })} } 
+          cancel={hideModal}
+          enter={pushItem} 
           cancelText= {'Cancel'}
           enterText= {'Enter'}
         />
 
-      </KeyboardAvoidingView>
+          <ScrollView>  
+            {itemArray.map((item, i) => 
+              <ReviewItem 
+                key={i}
+                name={item.name}
+                qty={+item.quantity}
+              />
+            )}
+          </ScrollView>
+      </KeyboardAvoidingView> 
     );
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const QtyPopup = ({ productName, productImage, productCode, productId, productMeasure, changeText, qty, cancel, enter }) => 
-//   (
-//      <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
-
-//       <View style={styles.infoContainer}>
-//         <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
-//         <Image
-//           source={{uri: this.state.currentProduct.image}}
-//           style={styles.productImage}
-//         />
-//       </View>
-
-//       <View style={styles.qtyConatiner}>
-//         <Text style={styles.textBold}>UPC: {this.state.currentProduct.upc_code}</Text>  
-//         <Text style={styles.textBold}>Enter {this.state.currentProduct.measure}: </Text>
-//         <TextInput 
-//           onChangeText={}
-//           value={qty}
-//           style={styles.qtyInput} 
-//           keyboardType={'number-pad'}
-//           autoFocus={true}
-//           ref='TextInput'
-//         />
-//       </View>
-
-//       <ButtonGroup 
-//         cancel={() => { this.setModalVisible(false) } }
-//         enter={() => { this.onEnter({quantity: +(this.state.qty), product_id: this.state.currentProduct.id, session_id: +(this.state.session_id) })} } 
-//         cancelText= {'Cancel'}
-//         enterText= {'Enter'}
-//       />
-
-//     </KeyboardAvoidingView>
-//   );
-
 
 export default QtyPopup

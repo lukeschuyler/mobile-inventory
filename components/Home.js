@@ -18,19 +18,19 @@ export default class Home extends Component {
       navigator: PropTypes.object.isRequired
     }
 
-    _onForwardWaste = () => {
-      this.props.navigator.push({
-        component: Scanner,
-        title: 'Waste'
-      });
-    }
+  _onForwardWaste = () => {
+    this.props.navigator.push({
+      component: Scanner,
+      title: 'Waste'
+    });
+  }
 
-    _onForwardInv = () => {
-      this.props.navigator.push({
-        component: Scanner,
-        title: 'Inventory'
-      });
-    }
+  _onForwardInv = () => {
+    this.props.navigator.push({
+      component: Scanner,
+      title: 'Inventory'
+    });
+  }
 
   render() {
       return (
