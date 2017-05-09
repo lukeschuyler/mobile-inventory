@@ -30,7 +30,7 @@ export default class Scanner extends Component {
       modalVisible: false,
       review: false,
       currentProduct: {},
-      sessionArray: [],
+      sessionArray: this.props.sessionArray,
       qty: '',
       sessionType: this.props.route.title
     }
@@ -69,16 +69,19 @@ export default class Scanner extends Component {
   // GO BACK TO HOME
 
   onCancel() {
-    this.props.navigator.push({
-      component: Home,
-      title: 'Home'
-    })
+    this.props.navigator.popToTop()
   }
 
   // REVIEW SESSION
 
   onReview() {
-    this.setState({review: true})
+    this.props.navigator.push({
+      component: Review,
+      title: 'Review',
+      passProps: { itemArray: this.state.sessionArray },
+      barTintColor: '#ccc',
+      navigationBarHidden: true
+    })
   }
 
   // RENDER

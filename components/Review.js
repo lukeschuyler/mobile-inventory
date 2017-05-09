@@ -21,10 +21,20 @@ class Review extends Component {
     this.state = {
       itemArray: this.props.itemArray,
       sessionType: this.props.sessionType,
-      loading: false,
-      goHome: this.props.goHome
+      loading: false
     }
     this.upload = this.upload.bind(this)
+    this.onCancel = this.onCancel.bind(this)
+  }
+
+  static propTypes = {
+    route: PropTypes.object.isRequired,
+    navigator: PropTypes.object.isRequired
+  }
+
+
+  onCancel() {
+    this.props.navigator.pop()
   }
 
   postSession() {
@@ -61,8 +71,8 @@ class Review extends Component {
        const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
-          console.log(res)
-            this.state.goHome()           
+          console.log(res) 
+            this.props.navigator.popToTop() 
           })
          .catch(err => {
           alert('Something happened! Please try again')
@@ -93,7 +103,7 @@ class Review extends Component {
             </ScrollView>
           </View>
           <ButtonGroup 
-            cancel={this.props.backToScan}
+            cancel={this.onCancel}
             enter={this.upload} 
             cancelText= {'Cancel'}
             enterText= {'Upload'}
