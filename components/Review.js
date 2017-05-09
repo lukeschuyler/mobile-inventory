@@ -55,6 +55,7 @@ class Review extends Component {
   postSession() {
     let sessionType;
     let sessionKey;
+    console.log(this.state.sessionType)
     if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
       sessionKey = 'waste_session_id'
@@ -62,6 +63,7 @@ class Review extends Component {
       sessionType = 'inv'
       sessionKey = 'inventory_session_id'
     }
+    console.log(sessionType)
     return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, { username: 'lukeschuyler' })
       .then(session => session.data.id) 
       .catch(err => {
@@ -133,7 +135,7 @@ class Review extends Component {
         <View style={[styles.centering, { flex: 1 }]}>
           <ActivityIndicator
             animating={this.state.loading}
-            style={{height: 80}]}
+            style={{height: 80}}
             size="large"
           />
         </View>

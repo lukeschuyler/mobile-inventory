@@ -78,7 +78,7 @@ export default class Scanner extends Component {
     this.props.navigator.push({
       component: Review,
       title: 'Review',
-      passProps: { itemArray: this.state.sessionArray },
+      passProps: { itemArray: this.state.sessionArray, sessionType: this.state.sessionType },
       barTintColor: '#ccc',
       navigationBarHidden: true
     })
