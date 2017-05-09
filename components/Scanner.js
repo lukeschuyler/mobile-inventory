@@ -9,7 +9,6 @@ import Review from './Review.js'
 import axios from 'axios'
  
 import {
-  AppRegistry,
   Text,
   NavigatorIOS,
   TouchableOpacity,
@@ -37,7 +36,6 @@ export default class Scanner extends Component {
     }
     this.onCancel = this.onCancel.bind(this)
     this.onReview = this.onReview.bind(this)
-
   }
 
   static propTypes = {
@@ -49,12 +47,13 @@ export default class Scanner extends Component {
     this.state.sessionArray.push(item)
     this.setModalVisible(false)
     this.setState({qty: ''})
-    console.log(this.state.sessionArray)
   }
 
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
+
+  // SCANNER CALLBACK
 
   onSuccess(e) {
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
@@ -75,6 +74,8 @@ export default class Scanner extends Component {
       title: 'Home'
     })
   }
+
+  // REVIEW SESSION
 
   onReview() {
     this.setState({review: true})
@@ -121,6 +122,7 @@ export default class Scanner extends Component {
                 <Image
                   source={{uri: this.state.currentProduct.image}}
                   style={styles.productImage}
+                  resizeMode={Image.resizeMode.contain}
                 />
               </View>
               <View style={styles.qtyConatiner}>
@@ -130,7 +132,7 @@ export default class Scanner extends Component {
                   onChangeText={(qty) => this.setState({qty})}
                   value={this.state.qty}
                   style={styles.qtyInput} 
-                  keyboardType={'number-pad'}
+                  keyboardType={'numeric'}
                   autoFocus={true}
                   ref='TextInput'
                 />
@@ -164,6 +166,7 @@ export default class Scanner extends Component {
           itemArray={this.state.sessionArray}
           backToScan={()=> { this.setState({ review: false }) }}
           sessionType={this.state.sessionType}
+          goHome={this.onCancel}
         />
       </Modal>
       )
@@ -172,7 +175,7 @@ export default class Scanner extends Component {
 }
 
 
-//         <QtyPopup 
+//    <QtyPopup 
 //   image={currentProduct.image}
 //   name={currentProduct.name}
 //   code={currentProduct.upc_code}

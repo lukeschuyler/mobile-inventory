@@ -1,7 +1,6 @@
 'use strict';
  
-import React, { Component, PropTypes } from 'react';
-import Home from './Home'
+import React, { Component } from 'react';
 
 import { 
   Text,
@@ -38,12 +37,12 @@ class ReviewItem extends Component {
       return  (
         <View style={styles.reviewItem}>
           <View style={styles.itemLabel}>
-           <Text >{this.props.name}</Text>
-           <Text >{this.props.code}</Text>
+           <Text>{this.props.name}</Text>
+           <Text>{this.props.code}</Text>
           </View>
           <Text>{this.props.measure}: </Text>
           <TextInput
-            onChangeText={(qty) => { this.setState({qty}) }}
+            onChangeText={this.props.updateQty}
             value={this.state.qty.toString()}
             style={styles.reviewInput} 
             autoFocus={false}
@@ -57,8 +56,8 @@ class ReviewItem extends Component {
       return (
         <View style={styles.reviewItem}>
           <View style={styles.itemLabel}>
-           <Text >{this.props.name}</Text>
-           <Text >{this.props.code}</Text>
+           <Text>{this.props.name}</Text>
+           <Text>{this.props.code}</Text>
           </View>
           <TouchableHighlight onPress={this.edit}><Text>{this.props.measure}: {this.state.qty}</Text></TouchableHighlight>
         </View>        

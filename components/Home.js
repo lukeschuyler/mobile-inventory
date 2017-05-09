@@ -35,6 +35,7 @@ export default class Home extends Component {
   render() {
       return (
         <View style={styles.container}>
+        <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Inventory Manager</Text></View>
           <TouchableHighlight onPress={this._onForwardWaste} style={styles.wasteButton}>
             <Text>Waste</Text>
           </TouchableHighlight>

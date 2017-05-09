@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   productImage: {
-    height: 200,
+    height: 100,
     width: 300,
   },
   navContainer: {
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 5
   },
   reviewItem: {
-    flex: 1,
+    flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 1,
