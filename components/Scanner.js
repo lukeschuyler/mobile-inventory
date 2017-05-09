@@ -49,7 +49,6 @@ export default class Scanner extends Component {
     this.state.sessionArray.push(item)
     this.setModalVisible(false)
     this.setState({qty: ''})
-    console.log(this.state.sessionArray)
   }
 
   setModalVisible(visible) {
@@ -172,7 +171,7 @@ export default class Scanner extends Component {
 }
 
 
-//         <QtyPopup 
+//    <QtyPopup 
 //   image={currentProduct.image}
 //   name={currentProduct.name}
 //   code={currentProduct.upc_code}
