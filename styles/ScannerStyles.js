@@ -97,18 +97,25 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
     marginLeft: 20, 
-    marginRight: 20
+    marginRight: 20,
+    borderColor: 'gray', 
+    padding: 5
   },
   reviewInput: {
     height: 40, 
     borderColor: 'gray', 
     borderWidth: 1, 
     width: 60,
+    borderRadius: 10,
+    paddingLeft: 5
   },
   reviewHeader: {
     fontSize: 40,
     fontWeight: '700',
     color: '#111'
+  },
+  itemLabel: {
+
   }
 });
 
