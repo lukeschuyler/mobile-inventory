@@ -157,22 +157,6 @@ export default class Scanner extends Component {
           </Modal>
       </View>
       )
-    } else {
-      return (
-      <Modal
-        animationType={'slide'}
-        transparent={false}
-        visible={this.state.review}
-        onRequestClose={() => {alert("Modal has been closed.")}}
-        >
-        <Review 
-          itemArray={this.state.sessionArray}
-          backToScan={()=> { this.setState({ review: false }) }}
-          sessionType={this.state.sessionType}
-          goHome={this.onCancel}
-        />
-      </Modal>
-      )
     }
   }
 }
