@@ -43,14 +43,24 @@ export default class Home extends Component {
           <View style={styles.homeBodyContainer}>
             <View style={styles.selectHeaderContainer}>
               <Text style={styles.homeHeader}>Select Action:</Text>
-            </View>     
-            <View style={styles.btnContainer}> 
-              <TouchableHighlight underlayColor="white" onPress={this._onForwardWaste} style={styles.wasteButton}>
-                <Text>Waste</Text>
-              </TouchableHighlight>
-              <TouchableHighlight underlayColor="white" onPress={this._onForwardInv} style={styles.invButton}>
-                <Text>Inventory</Text>
-              </TouchableHighlight>
+            </View>   
+            <View style={styles.btnGroupContainer}>  
+              <View style={styles.btnContainer}> 
+                <TouchableHighlight underlayColor="white" onPress={this._onForwardWaste} style={styles.wasteButton}>
+                  <Text>Waste</Text>
+                </TouchableHighlight>
+                <TouchableHighlight underlayColor="white" onPress={this._onForwardInv} style={styles.invButton}>
+                  <Text>Inventory</Text>
+                </TouchableHighlight>
+              </View>
+              <View style={styles.btnContainer}> 
+                <TouchableHighlight underlayColor="white" onPress={this._onForwardWaste} style={styles.recButton}>
+                  <Text>Receiving</Text>
+                </TouchableHighlight>
+                <TouchableHighlight underlayColor="white" onPress={this._onForwardInv} style={styles.salesButton}>
+                  <Text>Sales</Text>
+                </TouchableHighlight>
+              </View>
             </View>
           </View> 
         </View>
@@ -64,18 +74,36 @@ const styles = StyleSheet.create({
   },
   wasteButton: {
     backgroundColor: 'rgba(255,200,0,.8)',
-    height: 70,
+    height: 100,
     width: 100,
-    borderRadius: 10,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20
   },
   invButton: {
     backgroundColor: 'rgba(0,90,255,.8)',
-    height: 70,
+    height: 100,
     width: 100,
-    borderRadius: 10,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20
+  },
+  salesButton: {
+    backgroundColor: 'rgba(217,24,31,.8)',
+    height: 100,
+    width: 100,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 20
+  },
+  recButton: {
+    backgroundColor: 'rgb(30, 200, 24)',
+    height: 100,
+    width: 100,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20
@@ -101,9 +129,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   btnContainer: {
-    flex: 1    
+    flex: 1,
+    alignItems: 'center',
   },
-  footer: {
-
-  }
+  btnGroupContainer: {
+    flex: 1,
+    flexDirection: 'row'
+  } 
 });

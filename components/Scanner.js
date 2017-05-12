@@ -160,21 +160,3 @@ export default class Scanner extends Component {
     }
   }
 }
-
-
-//    <QtyPopup 
-//   image={currentProduct.image}
-//   name={currentProduct.name}
-//   code={currentProduct.upc_code}
-//   measure={currentProduct.measure}
-//   qty={this.state.qty}
-//   hideModal={() => { this.setModalVisible(false) } }
-//   pushItem={() => { this.onEnter({
-//               quantity: +(this.state.qty), 
-//               product_id: this.state.currentProduct.id, 
-//               session_id: +(this.state.session_id),
-//               name: this.state.currentProduct.name,
-//               upc_code: this.state.currentProduct.upc_code }
-//             )}} 
-//   onChangeQty={(qty) => this.setState({qty})}
-// />
