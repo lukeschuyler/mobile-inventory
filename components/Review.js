@@ -59,9 +59,15 @@ class Review extends Component {
     if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
       sessionKey = 'waste_session_id'
-    } else {
+    } else if (this.state.sessionType === 'Inventory') {
       sessionType = 'inv'
       sessionKey = 'inventory_session_id'
+    } else if (this.state.sessionType === 'Sales') {
+      sessionType = 'sales'
+      sessionKey = 'sales_session_id'
+    } else {
+      sessionType = 'rec'
+      sessionKey = 'receiving_session_id'
     }
     console.log(sessionType)
     return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, { username: 'lukeschuyler' })
@@ -91,7 +97,7 @@ class Review extends Component {
           setTimeout(() => {
             Toast.show('Session uploaded successfully');
             this.props.navigator.popToTop() 
-            }, 1500)
+            }, 1000)
           })
          .catch(err => {
           alert('Something happened! Please try again')

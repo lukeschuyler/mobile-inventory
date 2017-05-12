@@ -18,19 +18,10 @@ export default class Home extends Component {
       navigator: PropTypes.object.isRequired
     }
 
-  _onForwardWaste = () => {
+  _onForward = (nav) => {
     this.props.navigator.push({
       component: Scanner,
-      title: 'Waste',
-      passProps: { sessionArray: [] },
-      navigationBarHidden: true
-    });
-  }
-
-  _onForwardInv = () => {
-    this.props.navigator.push({
-      component: Scanner,
-      title: 'Inventory',
+      title: nav,
       passProps: { sessionArray: [] },
       navigationBarHidden: true
     });
@@ -46,18 +37,18 @@ export default class Home extends Component {
             </View>   
             <View style={styles.btnGroupContainer}>  
               <View style={styles.btnContainer}> 
-                <TouchableHighlight underlayColor="white" onPress={this._onForwardWaste} style={styles.wasteButton}>
+                <TouchableHighlight underlayColor="white" onPress={() => { this._onForward('Waste')} } style={styles.wasteButton}>
                   <Text>Waste</Text>
                 </TouchableHighlight>
-                <TouchableHighlight underlayColor="white" onPress={this._onForwardInv} style={styles.invButton}>
+                <TouchableHighlight underlayColor="white" onPress={() => { this._onForward('Inventory')} } style={styles.invButton}>
                   <Text>Inventory</Text>
                 </TouchableHighlight>
               </View>
               <View style={styles.btnContainer}> 
-                <TouchableHighlight underlayColor="white" onPress={this._onForwardWaste} style={styles.recButton}>
+                <TouchableHighlight underlayColor="white" onPress={() => { this._onForward('Receiving')} } style={styles.recButton}>
                   <Text>Receiving</Text>
                 </TouchableHighlight>
-                <TouchableHighlight underlayColor="white" onPress={this._onForwardInv} style={styles.salesButton}>
+                <TouchableHighlight underlayColor="white" onPress={() => { this._onForward('Sales')} } style={styles.salesButton}>
                   <Text>Sales</Text>
                 </TouchableHighlight>
               </View>
