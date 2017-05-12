@@ -98,20 +98,50 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     borderWidth: 1,
+    borderColor: 'rgba(0,0,0, .05)',
     marginLeft: 20, 
     marginRight: 20,
     borderColor: 'gray', 
     padding: 5,
     margin: 10,
-    borderRadius: 10
+    borderRadius: 10,
+    shadowColor: 'rgba(0,0,0, .2)',
+    shadowOffset: { width: 5, height: 5 },
+    shadowRadius: 5
+  },
+  reviewItemEdit: {
+    flex: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    // borderWidth: 1,
+    marginLeft: 20, 
+    marginRight: 20,
+    borderColor: 'gray', 
+    padding: 5,
+    margin: 10,
+    borderRadius: 10,
+    height: 100,
+    alignItems: 'center',
+    backgroundColor: 'rgba(255,255,0,.6)'
+  },
+  doneBtn: {
+    height:60,
+    width:60,
+    borderRadius: 100,
+    backgroundColor: 'rgba(0,0,0, .3)',
+    // flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 7
   },
   reviewInput: {
     height: 40, 
-    borderColor: 'gray', 
+    borderColor: 'white', 
     borderWidth: 1, 
     width: 60,
-    borderRadius: 10,
-    paddingLeft: 5
+    borderRadius: 5,
+    paddingLeft: 5,
+    marginRight: 5
   },
   reviewHeader: {
     fontSize: 20,
@@ -128,6 +158,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 8,
   },
+  doneText: {
+    fontSize: 17
+  }
 });
 
 export default styles;

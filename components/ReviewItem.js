@@ -42,22 +42,31 @@ class ReviewItem extends Component {
   render() {
     if(this.state.editing) {
       return  (
-        <View style={styles.reviewItem}>
+        <View style={styles.reviewItemEdit}>
           <View style={styles.itemLabel}>
-           <Text>{this.props.name}</Text>
-           <Text>{this.props.code}</Text>
+           <Text style={styles.doneText}>{this.props.name}</Text>
+           <Text style={styles.doneText}>{this.props.code}</Text>
           </View>
-          <Text>{this.props.measure}: </Text>
-          <TextInput
-            onChangeText={ (qty) => { this.setState({qty}) }}
-            value={this.state.qty.toString()}
-            style={styles.reviewInput} 
-            autoFocus={true}
-            keyboardType={'numeric'}
-            defaultValue={this.state.qty.toString()}
-            ref='editInput'
-          />
-          <TouchableHighlight onPress={() => { this.done(this.state.qty, this.state.index ) } }><Text>Done</Text></TouchableHighlight>
+          <View>
+            <TouchableHighlight 
+              underlayColor="white" style={styles.doneBtn} 
+              onPress={() => { this.done(this.state.qty, this.state.index ) } }
+            >
+              <Text style={styles.doneText}>Done</Text>
+            </TouchableHighlight>
+          </View>
+          <View>
+            <Text style={styles.doneText}>{this.props.measure}: </Text>
+            <TextInput
+              onChangeText={ (qty) => { this.setState({qty}) }}
+              value={this.state.qty.toString()}
+              style={styles.reviewInput} 
+              autoFocus={true}
+              keyboardType={'numeric'}
+              defaultValue={this.state.qty.toString()}
+              ref='editInput'
+            />
+          </View>
         </View>
       )
     } else {
