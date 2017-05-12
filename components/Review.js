@@ -52,25 +52,8 @@ class Review extends Component {
     this.props.navigator.pop()
   }
 
-  postSession() {
-    let sessionType;
-    let sessionKey;
-    console.log(this.state.sessionType)
-    if (this.state.sessionType === 'Waste') {
-      sessionType = 'waste'
-      sessionKey = 'waste_session_id'
-    } else if (this.state.sessionType === 'Inventory') {
-      sessionType = 'inv'
-      sessionKey = 'inventory_session_id'
-    } else if (this.state.sessionType === 'Sales') {
-      sessionType = 'sales'
-      sessionKey = 'sales_session_id'
-    } else {
-      sessionType = 'rec'
-      sessionKey = 'receiving_session_id'
-    }
-    console.log(sessionType)
-    return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, { username: 'lukeschuyler' })
+  postSession(type) {
+    return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${type}_sessions`, { username: 'lukeschuyler' })
       .then(session => session.data.id) 
       .catch(err => {
         console.log(err)
@@ -84,11 +67,17 @@ class Review extends Component {
     if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
       sessionKey = 'waste_session_id'
-    } else {
+    } else if (this.state.sessionType === 'Inventory') {
       sessionType = 'inv'
       sessionKey = 'inventory_session_id'
+    } else if (this.state.sessionType === 'Sales') {
+      sessionType = 'sales'
+      sessionKey = 'sales_session_id'
+    } else {
+      sessionType = 'rec'
+      sessionKey = 'receiving_session_id'
     }
-    this.postSession()
+    this.postSession(sessionType)
     .then(id => {
       Promise.all(this.state.itemArray.map(item => {
        const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
