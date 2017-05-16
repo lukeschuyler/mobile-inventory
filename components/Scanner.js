@@ -64,7 +64,15 @@ export default class Scanner extends Component {
         this.refs.TextInput.focus()
       })
       .catch((err) => {
-        Toast.show('Product Not Found');
+        // Toast.show('Product Not Found');
+        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
+        .then(res => {
+          console.log(res.data)
+          // this.setState({ products: res.data, notFound: false })
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
       })
   }
 
@@ -89,7 +97,6 @@ export default class Scanner extends Component {
   // RENDER
 
   render() {
-    console.log(this.state)
     if (!this.state.modalVisible && !this.state.review) {
        return (
         <NavigatorIOS
