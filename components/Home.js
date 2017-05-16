@@ -30,7 +30,7 @@ export default class Home extends Component {
   render() {
       return (
         <View style={styles.container}>
-          <View style={styles.homeHeaderContainer}><Text style={styles.homeHeader}>Inventory Manager</Text></View>
+          <View style={styles.homeHeaderContainer}><Text style={styles.homeHeader}>Simply Managed Mobile</Text></View>
           <View style={styles.homeBodyContainer}>
             <View style={styles.selectHeaderContainer}>
               <Text style={styles.homeHeader}>Select Action:</Text>

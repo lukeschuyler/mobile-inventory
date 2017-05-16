@@ -7,6 +7,7 @@ import styles from '../styles/ScannerStyles.js'
 import ButtonGroup from './ButtonGroup.js'
 import Review from './Review.js'
 import axios from 'axios'
+import Toast from 'react-native-simple-toast';
  
 import {
   Text,
@@ -62,7 +63,7 @@ export default class Scanner extends Component {
         this.refs.TextInput.focus()
       })
       .catch((err) => {
-        console.log(err)
+        Toast.show('Product Not Found');
       })
   }
 

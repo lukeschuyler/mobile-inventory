@@ -11,7 +11,8 @@ import {
   View,
   Text,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
@@ -101,7 +102,7 @@ class Review extends Component {
       return (
         <View style={styles.reviewSection}>
           <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Review Selection</Text></View>
-          <View style={styles.reviewScroll}>
+          <KeyboardAvoidingView style={styles.reviewScroll}>
             <ScrollView>  
               {itemArray.map((item, i) => 
                 <ReviewItem 
@@ -116,13 +117,14 @@ class Review extends Component {
                 />
               )}
             </ScrollView>
-          </View>
+
           <ButtonGroup 
             cancel={this.onCancel}
             enter={this.upload} 
             cancelText= {'Cancel'}
             enterText= {'Upload'}
           />
+        </KeyboardAvoidingView>
         </View>
       )
     } else {
