@@ -7,7 +7,7 @@ import {
   TextInput,
   View,
   TouchableHighlight,
-  KeyBoardAvoidingView
+  KeyboardAvoidingView
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
@@ -43,7 +43,7 @@ class ReviewItem extends Component {
   render() {
     if(this.state.editing) {
       return  (
-        <View style={styles.reviewItemEdit}>
+        <KeyboardAvoidingView style={styles.reviewItemEdit}>
           <View style={styles.itemLabel}>
            <Text style={styles.doneText}>{this.props.name}</Text>
            <Text style={styles.doneText}>{this.props.code}</Text>
@@ -68,21 +68,19 @@ class ReviewItem extends Component {
               ref='editInput'
             />
           </View>
-        </View>
+        </KeyboardAvoidingView>
       )
     } else {
       return (
-        <KeyBoardAvoidingView>
-        <TouchableHighlight onPress={this.edit}>
-        <View style={styles.reviewItem}>
-          <View style={styles.itemLabel}>
-           <Text>{this.props.name}</Text>
-           <Text>{this.props.code}</Text>
+          <TouchableHighlight style={styles.reviewItem} onPress={this.edit}>
+          <View>
+            <View style={styles.itemLabel}>
+             <Text>{this.props.name}</Text>
+             <Text>{this.props.code}</Text>
+            </View>
+            <Text>{this.props.measure}: {this.state.qty}</Text>
           </View>
-          <Text>{this.props.measure}: {this.state.qty}</Text>
-        </View>
-        </TouchableHighlight>      
-      </KeyBoardAvoidingView>  
+          </TouchableHighlight>        
       )
     }
   }

@@ -47,7 +47,7 @@ export default class Scanner extends Component {
   onEnter(item) {
     this.state.sessionArray.push(item)
     this.setModalVisible(false)
-    this.setState({qty: ''})
+    this.setState({qty: '', currentProduct: {}})
   }
 
   setModalVisible(visible) {
@@ -57,6 +57,7 @@ export default class Scanner extends Component {
   // SCANNER CALLBACK
 
   onSuccess(e) {
+    console.log(e.data)
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
         this.setState({modalVisible: true, currentProduct: product.data})
@@ -88,6 +89,7 @@ export default class Scanner extends Component {
   // RENDER
 
   render() {
+    console.log(this.state)
     if (!this.state.modalVisible && !this.state.review) {
        return (
         <NavigatorIOS
@@ -95,6 +97,7 @@ export default class Scanner extends Component {
             component: QRCodeScanner,
             title: 'Scanner',
             passProps: {
+              reactivate: true,
               onRead: this.onSuccess.bind(this),
               topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan {this.state.sessionType} Item</Text> </Text>,
               bottomContent: <View style={styles.navContainer}>

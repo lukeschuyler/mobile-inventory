@@ -46,7 +46,6 @@ class Review extends Component {
     this.setState({
       itemArray: newArray
     })
-    console.log(this.state.itemArray)
   }
 
   onCancel() {
@@ -102,7 +101,7 @@ class Review extends Component {
       return (
         <View style={styles.reviewSection}>
           <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Review Selection</Text></View>
-          <KeyboardAvoidingView style={styles.reviewScroll}>
+          <View style={styles.reviewScroll}>
             <ScrollView>  
               {itemArray.map((item, i) => 
                 <ReviewItem 
@@ -117,14 +116,13 @@ class Review extends Component {
                 />
               )}
             </ScrollView>
-
+          </View>
           <ButtonGroup 
             cancel={this.onCancel}
             enter={this.upload} 
             cancelText= {'Cancel'}
             enterText= {'Upload'}
           />
-        </KeyboardAvoidingView>
         </View>
       )
     } else {

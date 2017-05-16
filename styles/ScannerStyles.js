@@ -101,13 +101,11 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0, .05)',
     marginLeft: 20, 
     marginRight: 20,
+    marginBottom: 20,
     borderColor: 'gray', 
     padding: 5,
     margin: 10,
-    borderRadius: 10,
-    shadowColor: 'rgba(0,0,0, .2)',
-    shadowOffset: { width: 5, height: 5 },
-    shadowRadius: 5
+    borderRadius: 10
   },
   reviewItemEdit: {
     flex: 4,
@@ -129,7 +127,6 @@ const styles = StyleSheet.create({
     width:60,
     borderRadius: 100,
     backgroundColor: 'rgba(0,0,0, .3)',
-    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 7
