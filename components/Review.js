@@ -5,6 +5,7 @@ import Home from './Home'
 import ButtonGroup from './ButtonGroup.js'
 import axios from 'axios'
 import ReviewItem from './ReviewItem.js'
+import Spinner from 'react-native-loading-spinner-overlay';
 import Toast from 'react-native-simple-toast';
 
 import { 
@@ -99,7 +100,7 @@ class Review extends Component {
     let itemArray = this.state.itemArray
     if(!this.state.loading) {
       return (
-        <KeyboardAvoidingView behavior="padding" style={styles.reviewSection}>
+        <View style={styles.reviewSection}>
           <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Review Selection</Text></View>
           <View style={styles.reviewScroll}>
             <ScrollView>  
@@ -123,21 +124,23 @@ class Review extends Component {
             cancelText= {'Cancel'}
             enterText= {'Upload'}
           />
-        </KeyboardAvoidingView>
+        </View>
       )
     } else {
       return (
-        <View style={[styles.centering, { flex: 1 }]}>
-          <ActivityIndicator
-            animating={this.state.loading}
-            style={{height: 80}}
-            size="large"
-          />
-        </View>
+        <Spinner visible={this.state.loading} textContent={""} color={"silver"} overlayColor='rgba(0,0,0, .1)' textStyle={{color: '#ddd'}} />
       )
     }
   }
 }
+
+        // <View style={[styles.centering, { flex: 1 }]}>
+        //   <ActivityIndicator
+        //     animating={this.state.loading}
+        //     style={{height: 80}}
+        //     size="large"
+        //   />
+        // </View>
 
 
 export default Review
