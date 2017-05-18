@@ -17,7 +17,8 @@ const ButtonGroup = ({cancel, enter, cancelText, enterText}) =>
       </TouchableHighlight>
       <TouchableHighlight 
         style={styles.enterBtn} 
-        onPress={enter}>
+        onPress={enter}
+        underlayColor="white">
         <Text>{enterText}</Text>
       </TouchableHighlight>
     </View>

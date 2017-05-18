@@ -118,13 +118,14 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     height: 100,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderWidth: 1
   },
   doneBtn: {
     height:60,
     width:60,
     borderRadius: 100,
-    backgroundColor: 'rgba(217,24,31,.8)',
+    backgroundColor: 'rgb(0,122,255)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 7
@@ -154,7 +155,17 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   doneText: {
-    fontSize: 17
+    fontSize: 17,
+    color: 'rgba(255,255,0,.8)'
+  },
+  labelText: {
+    borderWidth: 1
+  },
+  doneBtnContainer: {
+    borderWidth: 1
+  },
+  editInputContainer: {
+    borderWidth: 1
   }
 });
 

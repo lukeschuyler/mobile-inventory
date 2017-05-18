@@ -45,18 +45,18 @@ class ReviewItem extends Component {
       return  (
         <KeyboardAvoidingView behavior="padding" style={styles.reviewItemEdit}>
           <View style={styles.itemLabel}>
-           <Text style={styles.doneText}>{this.props.name}</Text>
-           <Text style={styles.doneText}>{this.props.code}</Text>
+           <Text style={styles.labelText}>{this.props.name}</Text>
+           <Text style={styles.labelText}>{this.props.code}</Text>
           </View>
-          <View>
+          <KeyboardAvoidingView style={styles.doneBtnContainer}>
             <TouchableHighlight 
               underlayColor="white" style={styles.doneBtn} 
               onPress={() => { this.done(this.state.qty, this.state.index ) } }
             >
               <Text style={styles.doneText}>Done</Text>
             </TouchableHighlight>
-          </View>
-          <View>
+          </KeyboardAvoidingView>
+          <View style={styles.editInputContainer}>
             <Text style={styles.doneText}>{this.props.measure}: </Text>
             <TextInput
               onChangeText={ (qty) => { this.setState({qty}) }}
