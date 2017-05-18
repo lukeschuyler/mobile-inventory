@@ -43,7 +43,7 @@ class ReviewItem extends Component {
   render() {
     if(this.state.editing) {
       return  (
-        <KeyboardAvoidingView style={styles.reviewItemEdit}>
+        <KeyboardAvoidingView behavior="padding" style={styles.reviewItemEdit}>
           <View style={styles.itemLabel}>
            <Text style={styles.doneText}>{this.props.name}</Text>
            <Text style={styles.doneText}>{this.props.code}</Text>

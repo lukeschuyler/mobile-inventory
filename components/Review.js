@@ -56,7 +56,7 @@ class Review extends Component {
     return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${type}_sessions`, { username: 'lukeschuyler' })
       .then(session => session.data.id) 
       .catch(err => {
-        console.log(err)
+        Toast.show('Could not post Session. Please try again.');
       })
   }
 
@@ -89,7 +89,7 @@ class Review extends Component {
             }, 1000)
           })
          .catch(err => {
-          alert('Something happened! Please try again')
+            Toast.show('Could not post Session. Please try again.');
          })
       }))      
     })
@@ -99,11 +99,11 @@ class Review extends Component {
     let itemArray = this.state.itemArray
     if(!this.state.loading) {
       return (
-        <View style={styles.reviewSection}>
+        <KeyboardAvoidingView behavior="padding" style={styles.reviewSection}>
           <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Review Selection</Text></View>
           <View style={styles.reviewScroll}>
             <ScrollView>  
-              {itemArray.map((item, i) => 
+              {itemArray.map((item, i) =>
                 <ReviewItem 
                   key={i}
                   name={item.name}
@@ -123,7 +123,7 @@ class Review extends Component {
             cancelText= {'Cancel'}
             enterText= {'Upload'}
           />
-        </View>
+        </KeyboardAvoidingView>
       )
     } else {
       return (

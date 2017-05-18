@@ -37,6 +37,7 @@ export default class Scanner extends Component {
     }
     this.onCancel = this.onCancel.bind(this)
     this.onReview = this.onReview.bind(this)
+    this.onSuccess = this.onSuccess.bind(this)
   }
 
   static propTypes = {
@@ -57,22 +58,13 @@ export default class Scanner extends Component {
   // SCANNER CALLBACK
 
   onSuccess(e) {
-    console.log(e.data)
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
         this.setState({modalVisible: true, currentProduct: product.data})
         this.refs.TextInput.focus()
       })
       .catch((err) => {
-        // Toast.show('Product Not Found');
-        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
-        .then(res => {
-          console.log(res.data)
-          // this.setState({ products: res.data, notFound: false })
-        })
-        .catch(err => {
-          console.log(err.message)
-        })
+        Toast.show('Product Not Found');
       })
   }
 
@@ -105,7 +97,8 @@ export default class Scanner extends Component {
             title: 'Scanner',
             passProps: {
               reactivate: true,
-              onRead: this.onSuccess.bind(this),
+              reactivateTimeout: 2000,
+              onRead: this.onSuccess,
               topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan {this.state.sessionType} Item</Text> </Text>,
               bottomContent: <View style={styles.navContainer}>
                                 <TouchableOpacity onPress={this.onCancel} style={styles.buttonTouchable}>

@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    // borderWidth: 1,
     marginLeft: 20, 
     marginRight: 20,
     borderColor: 'gray', 
@@ -119,14 +118,13 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 10,
     height: 100,
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,0,.6)'
+    alignItems: 'center'
   },
   doneBtn: {
     height:60,
     width:60,
     borderRadius: 100,
-    backgroundColor: 'rgba(0,0,0, .3)',
+    backgroundColor: 'rgba(217,24,31,.8)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 7
