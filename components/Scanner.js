@@ -7,6 +7,7 @@ import styles from '../styles/ScannerStyles.js'
 import ButtonGroup from './ButtonGroup.js'
 import Review from './Review.js'
 import axios from 'axios'
+import Toast from 'react-native-simple-toast';
  
 import {
   Text,
@@ -36,6 +37,7 @@ export default class Scanner extends Component {
     }
     this.onCancel = this.onCancel.bind(this)
     this.onReview = this.onReview.bind(this)
+    this.onSuccess = this.onSuccess.bind(this)
   }
 
   static propTypes = {
@@ -46,7 +48,7 @@ export default class Scanner extends Component {
   onEnter(item) {
     this.state.sessionArray.push(item)
     this.setModalVisible(false)
-    this.setState({qty: ''})
+    this.setState({qty: '', currentProduct: {}})
   }
 
   setModalVisible(visible) {
@@ -62,7 +64,7 @@ export default class Scanner extends Component {
         this.refs.TextInput.focus()
       })
       .catch((err) => {
-        console.log(err)
+        Toast.show('Product Not Found');
       })
   }
 
@@ -78,7 +80,7 @@ export default class Scanner extends Component {
     this.props.navigator.push({
       component: Review,
       title: 'Review',
-      passProps: { itemArray: this.state.sessionArray },
+      passProps: { itemArray: this.state.sessionArray, sessionType: this.state.sessionType },
       barTintColor: '#ccc',
       navigationBarHidden: true
     })
@@ -94,8 +96,10 @@ export default class Scanner extends Component {
             component: QRCodeScanner,
             title: 'Scanner',
             passProps: {
-              onRead: this.onSuccess.bind(this),
-              topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan Item</Text> </Text>,
+              reactivate: true,
+              reactivateTimeout: 2000,
+              onRead: this.onSuccess,
+              topContent: <Text style={styles.centerText}> <Text style={styles.textBold}>Scan {this.state.sessionType} Item</Text> </Text>,
               bottomContent: <View style={styles.navContainer}>
                                 <TouchableOpacity onPress={this.onCancel} style={styles.buttonTouchable}>
                                   <Text style={styles.buttonText}>Cancel</Text>
@@ -160,21 +164,3 @@ export default class Scanner extends Component {
     }
   }
 }
-
-
-//    <QtyPopup 
-//   image={currentProduct.image}
-//   name={currentProduct.name}
-//   code={currentProduct.upc_code}
-//   measure={currentProduct.measure}
-//   qty={this.state.qty}
-//   hideModal={() => { this.setModalVisible(false) } }
-//   pushItem={() => { this.onEnter({
-//               quantity: +(this.state.qty), 
-//               product_id: this.state.currentProduct.id, 
-//               session_id: +(this.state.session_id),
-//               name: this.state.currentProduct.name,
-//               upc_code: this.state.currentProduct.upc_code }
-//             )}} 
-//   onChangeQty={(qty) => this.setState({qty})}
-// />

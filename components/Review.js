@@ -5,12 +5,14 @@ import Home from './Home'
 import ButtonGroup from './ButtonGroup.js'
 import axios from 'axios'
 import ReviewItem from './ReviewItem.js'
-import Spinner from 'react-native-loading-spinner-overlay';
+import Toast from 'react-native-simple-toast';
 
 import { 
   View,
   Text,
-  ScrollView
+  ScrollView,
+  ActivityIndicator,
+  KeyboardAvoidingView
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
@@ -44,27 +46,17 @@ class Review extends Component {
     this.setState({
       itemArray: newArray
     })
-    console.log(this.state.itemArray)
   }
 
   onCancel() {
     this.props.navigator.pop()
   }
 
-  postSession() {
-    let sessionType;
-    let sessionKey;
-    if (this.state.sessionType === 'Waste') {
-      sessionType = 'waste'
-      sessionKey = 'waste_session_id'
-    } else {
-      sessionType = 'inv'
-      sessionKey = 'inventory_session_id'
-    }
-    return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_sessions`, { username: 'lukeschuyler' })
+  postSession(type) {
+    return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${type}_sessions`, { username: 'lukeschuyler' })
       .then(session => session.data.id) 
       .catch(err => {
-        console.log(err)
+        Toast.show('Could not post Session. Please try again.');
       })
   }
 
@@ -75,21 +67,29 @@ class Review extends Component {
     if (this.state.sessionType === 'Waste') {
       sessionType = 'waste'
       sessionKey = 'waste_session_id'
-    } else {
+    } else if (this.state.sessionType === 'Inventory') {
       sessionType = 'inv'
       sessionKey = 'inventory_session_id'
+    } else if (this.state.sessionType === 'Sales') {
+      sessionType = 'sales'
+      sessionKey = 'sales_session_id'
+    } else {
+      sessionType = 'rec'
+      sessionKey = 'receiving_session_id'
     }
-    this.postSession()
+    this.postSession(sessionType)
     .then(id => {
       Promise.all(this.state.itemArray.map(item => {
        const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
-          console.log(res) 
+          setTimeout(() => {
+            Toast.show('Session uploaded successfully');
             this.props.navigator.popToTop() 
+            }, 1000)
           })
          .catch(err => {
-          alert('Something happened! Please try again')
+            Toast.show('Could not post Session. Please try again.');
          })
       }))      
     })
@@ -102,8 +102,8 @@ class Review extends Component {
         <View style={styles.reviewSection}>
           <View style={styles.reviewHeaderContainer}><Text style={styles.reviewHeader}>Review Selection</Text></View>
           <View style={styles.reviewScroll}>
-            <ScrollView>  
-              {itemArray.map((item, i) => 
+            <ScrollView keyboardShouldPersistTaps={'handled'}>  
+              {itemArray.map((item, i) =>
                 <ReviewItem 
                   key={i}
                   name={item.name}
@@ -127,8 +127,12 @@ class Review extends Component {
       )
     } else {
       return (
-        <View style={{ flex: 1 }}>
-          <Spinner visible={this.state.visible} textContent={"Uploading Session..."} textStyle={{color: '#FFF'}} />
+        <View style={[styles.centering, { flex: 1 }]}>
+          <ActivityIndicator
+            animating={this.state.loading}
+            style={{height: 80}}
+            size="large"
+          />
         </View>
       )
     }

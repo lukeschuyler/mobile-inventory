@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   infoContainer: {
-    flex: 4,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cancelBtn: {
-    backgroundColor: 'rgba(255,255,0,.8)',
+    backgroundColor: 'rgb(217, 30, 24)',
     height: 70,
     width: 100,
     borderRadius: 10,
@@ -71,10 +71,12 @@ const styles = StyleSheet.create({
     fontSize: 21,
     fontWeight: '500',
     color: '#000',
+    fontFamily: 'Avenir-Medium'
   },
   buttonText: {
     fontSize: 21,
     color: 'rgb(0,122,255)',
+    fontFamily: 'Avenir-Medium'
   },
   buttonTouchable: {
     padding: 50
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
     flex: .5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 30
   },
   reviewScroll: {
     flex: 5
@@ -95,30 +97,80 @@ const styles = StyleSheet.create({
     flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 1,
+    alignItems:'center',
     marginLeft: 20, 
     marginRight: 20,
+    marginBottom: 20,
     borderColor: 'gray', 
     padding: 5,
     margin: 10,
     borderRadius: 10
   },
+  reviewItemEdit: {
+    flex: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginLeft: 20, 
+    marginRight: 20,
+    borderColor: 'gray', 
+    padding: 5,
+    margin: 10,
+    borderRadius: 10,
+    height: 100,
+    alignItems: 'center',
+    borderWidth: 1
+  },
+  doneBtn: {
+    height:60,
+    width:60,
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 7
+  },
   reviewInput: {
     height: 40, 
-    borderColor: 'gray', 
+    borderColor: 'white', 
     borderWidth: 1, 
     width: 60,
-    borderRadius: 10,
-    paddingLeft: 5
+    borderRadius: 5,
+    paddingLeft: 5,
+    marginRight: 5
   },
   reviewHeader: {
-    fontSize: 40,
-    fontWeight: '700',
-    color: '#111'
+    fontSize: 20,
+    fontWeight: '300',
+    color: '#333',
+    fontFamily: 'Avenir-Medium',
   },
   itemLabel: {
     flex: 1,
     justifyContent: 'center'
+  },
+  centering: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 8,
+  },
+  doneText: {
+    fontSize: 17,
+    color: 'rgb(0,122,255)'
+  },
+  labelText: {
+    fontSize: 17
+  },
+  itemLabelNoEdit: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  nameCont: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  boldText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'rgb(0,122,255)'
   }
 });
 

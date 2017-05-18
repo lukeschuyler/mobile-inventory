@@ -13,12 +13,13 @@ const ButtonGroup = ({cancel, enter, cancelText, enterText}) =>
       <TouchableHighlight 
         style={styles.cancelBtn} 
         onPress={cancel}>
-       <Text>{cancelText}</Text>
+       <Text style={styles.btnText}>{cancelText}</Text>
       </TouchableHighlight>
       <TouchableHighlight 
         style={styles.enterBtn} 
-        onPress={enter}>
-        <Text>{enterText}</Text>
+        onPress={enter}
+        underlayColor="white">
+        <Text style={styles.btnTextY}>{enterText}</Text>
       </TouchableHighlight>
     </View>
   )

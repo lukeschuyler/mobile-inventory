@@ -6,7 +6,8 @@ import {
   Text,
   TextInput,
   View,
-  TouchableHighlight
+  TouchableHighlight,
+  KeyboardAvoidingView
 } from 'react-native'
 
 import styles from '../styles/ScannerStyles.js'
@@ -42,35 +43,46 @@ class ReviewItem extends Component {
   render() {
     if(this.state.editing) {
       return  (
-        <View style={styles.reviewItem}>
+        <KeyboardAvoidingView behavior="padding" style={styles.reviewItemEdit}>
           <View style={styles.itemLabel}>
-           <Text>{this.props.name}</Text>
-           <Text>{this.props.code}</Text>
+           <Text style={styles.labelText}>{this.props.name}</Text>
+           <Text style={styles.labelText}>{this.props.code}</Text>
           </View>
-          <Text>{this.props.measure}: </Text>
-          <TextInput
-            onChangeText={ (qty) => { this.setState({qty}) }}
-            value={this.state.qty.toString()}
-            style={styles.reviewInput} 
-            autoFocus={true}
-            keyboardType={'numeric'}
-            defaultValue={this.state.qty.toString()}
-            ref='editInput'
-          />
-          <TouchableHighlight onPress={() => { this.done(this.state.qty, this.state.index ) } }><Text>Done</Text></TouchableHighlight>
-        </View>
+          <KeyboardAvoidingView style={styles.doneBtnContainer}>
+            <TouchableHighlight 
+              underlayColor='rgb(0,122,255)' style={styles.doneBtn} 
+              onPress={() => { this.done(this.state.qty, this.state.index ) } }
+            >
+              <Text style={styles.doneText}>Done</Text>
+            </TouchableHighlight>
+          </KeyboardAvoidingView>
+          <View style={styles.editInputContainer}>
+            <Text style={styles.labelText}>{this.props.measure}: </Text>
+            <TextInput
+              onChangeText={ (qty) => { this.setState({qty}) }}
+              value={this.state.qty.toString()}
+              style={styles.reviewInput} 
+              autoFocus={true}
+              keyboardType={'numeric'}
+              defaultValue={this.state.qty.toString()}
+              ref='editInput'
+            />
+          </View>
+        </KeyboardAvoidingView>
       )
     } else {
       return (
-        <TouchableHighlight onPress={this.edit}>
-        <View style={styles.reviewItem}>
-          <View style={styles.itemLabel}>
-           <Text>{this.props.name}</Text>
-           <Text>{this.props.code}</Text>
+          <TouchableHighlight style={styles.reviewItem} onPress={this.edit}>
+          <View>
+            <View style={styles.itemLabelNoEdit}>
+             <View style={styles.nameCont}><Text style={styles.labelText}>{this.props.name}</Text></View>
+             <Text style={styles.labelText}>{this.props.code}</Text>
+            </View>
+            <View style={styles.editInputContainer}> 
+              <Text style={styles.boldText}>{this.props.measure}: {this.state.qty}</Text>
+            </View>
           </View>
-          <Text>{this.props.measure}: {this.state.qty}</Text>
-        </View>
-        </TouchableHighlight>        
+          </TouchableHighlight>        
       )
     }
   }
