@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   infoContainer: {
-    flex: 4,
+    flex: 2,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cancelBtn: {
-    backgroundColor: 'rgba(255,255,0,.8)',
+    backgroundColor: 'rgb(217, 30, 24)',
     height: 70,
     width: 100,
     borderRadius: 10,
@@ -97,8 +97,7 @@ const styles = StyleSheet.create({
     flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    borderWidth: 1,
-    borderColor: 'rgba(0,0,0, .05)',
+    alignItems:'center',
     marginLeft: 20, 
     marginRight: 20,
     marginBottom: 20,
@@ -125,7 +124,6 @@ const styles = StyleSheet.create({
     height:60,
     width:60,
     borderRadius: 100,
-    backgroundColor: 'rgb(0,122,255)',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 7
@@ -156,16 +154,23 @@ const styles = StyleSheet.create({
   },
   doneText: {
     fontSize: 17,
-    color: 'rgba(255,255,0,.8)'
+    color: 'rgb(0,122,255)'
   },
   labelText: {
-    borderWidth: 1
+    fontSize: 17
   },
-  doneBtnContainer: {
-    borderWidth: 1
+  itemLabelNoEdit: {
+    flex: 1,
+    justifyContent: 'center'
   },
-  editInputContainer: {
-    borderWidth: 1
+  nameCont: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  boldText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'rgb(0,122,255)'
   }
 });
 

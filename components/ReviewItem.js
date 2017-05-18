@@ -50,14 +50,14 @@ class ReviewItem extends Component {
           </View>
           <KeyboardAvoidingView style={styles.doneBtnContainer}>
             <TouchableHighlight 
-              underlayColor="white" style={styles.doneBtn} 
+              underlayColor='rgb(0,122,255)' style={styles.doneBtn} 
               onPress={() => { this.done(this.state.qty, this.state.index ) } }
             >
               <Text style={styles.doneText}>Done</Text>
             </TouchableHighlight>
           </KeyboardAvoidingView>
           <View style={styles.editInputContainer}>
-            <Text style={styles.doneText}>{this.props.measure}: </Text>
+            <Text style={styles.labelText}>{this.props.measure}: </Text>
             <TextInput
               onChangeText={ (qty) => { this.setState({qty}) }}
               value={this.state.qty.toString()}
@@ -74,11 +74,13 @@ class ReviewItem extends Component {
       return (
           <TouchableHighlight style={styles.reviewItem} onPress={this.edit}>
           <View>
-            <View style={styles.itemLabel}>
-             <Text>{this.props.name}</Text>
-             <Text>{this.props.code}</Text>
+            <View style={styles.itemLabelNoEdit}>
+             <View style={styles.nameCont}><Text style={styles.labelText}>{this.props.name}</Text></View>
+             <Text style={styles.labelText}>{this.props.code}</Text>
             </View>
-            <Text>{this.props.measure}: {this.state.qty}</Text>
+            <View style={styles.editInputContainer}> 
+              <Text style={styles.boldText}>{this.props.measure}: {this.state.qty}</Text>
+            </View>
           </View>
           </TouchableHighlight>        
       )
