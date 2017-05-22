@@ -28,9 +28,9 @@ they can upload the session. This takes them back to the Home screen.
 3. React-Native QRCode-Scanner
 
 <div align="center">
-  <img src="img/Screen Shot 2017-04-13 at 11.05.21 PM.png" /> <img style="{display: inline}" src="IMG/IMG_0017.PNG.png" />
-  <img src="img/Screen Shot 2017-04-13 at 11.06.25 PM.png" /> <img style="{display: inline}" src="IMG/IMG_0019.PNG.png" />
-  <img src="img/Screen Shot 2017-04-13 at 11.07.19 PM.png" /> <img style="{display: inline}" src="IMG/IMG_0020.PNG.png" />
-  <img src="img/Screen Shot 2017-04-13 at 11.07.47 PM.png" /> <img style="{display: inline}" src="IMG/IMG_0021.PNG.png" />
-  <img src="img/Screen Shot 2017-04-13 at 11.08.21 PM.png" /> <img style="{display: inline}" src="IMG/IMG_0022.PNG.png" />
+  <img src="img/Screen Shot 2017-04-13 at 11.05.21 PM.png" /> <img width="250px" style="{display: inline}" src="IMG/IMG_0017.PNG.png" />
+  <img src="img/Screen Shot 2017-04-13 at 11.06.25 PM.png" /> <img width="250px" style="{display: inline}" src="IMG/IMG_0019.PNG.png" />
+  <img src="img/Screen Shot 2017-04-13 at 11.07.19 PM.png" /> <img width="250px" style="{display: inline}" src="IMG/IMG_0020.PNG.png" />
+  <img src="img/Screen Shot 2017-04-13 at 11.07.47 PM.png" /> <img width="250px" style="{display: inline}" src="IMG/IMG_0021.PNG.png" />
+  <img src="img/Screen Shot 2017-04-13 at 11.08.21 PM.png" /> <img width="250px" style="{display: inline}" src="IMG/IMG_0022.PNG.png" />
 </div>
