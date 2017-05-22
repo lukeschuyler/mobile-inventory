@@ -28,9 +28,9 @@ they can upload the session. This takes them back to the Home screen.
 3. React-Native QRCode-Scanner
 
 <div align="center">
-  <img width="300px" style="{display: inline, margin: 50px}" src="IMG/IMG_0017.PNG.png" />
-  <img width="300px" style="{display: inline, margin: 50px}" src="IMG/IMG_0019.PNG.png" />
-  <img width="300px" style="{display: inline, margin: 50px}" src="IMG/IMG_0020.PNG.png" />
-  <img width="300px" style="{display: inline, margin: 50px}" src="IMG/IMG_0021.PNG.png" />
-  <img width="300px" style="{display: inline, margin: 50px}" src="IMG/IMG_0022.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0017.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0019.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0020.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0021.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0022.PNG.png" />
 </div>
