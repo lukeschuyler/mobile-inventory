@@ -2,7 +2,7 @@
 
 ## Back-End Capstone Mobile Application: Inventory Session Scanner
 
-## Links to Front End Repos:
+## Links to Related Repos:
   [API](https://github.com/lukeschuyler/inventory-mobile-API) 
   
   [Web](https://github.com/lukeschuyler/web-inventory)
