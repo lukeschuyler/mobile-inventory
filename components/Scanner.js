@@ -60,6 +60,7 @@ export default class Scanner extends Component {
   onSuccess(e) {
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
+        console.log(product)
         this.setState({modalVisible: true, currentProduct: product.data})
         this.refs.TextInput.focus()
       })
@@ -152,7 +153,8 @@ export default class Scanner extends Component {
                                 product_id: this.state.currentProduct.id, 
                                 session_id: +(this.state.session_id),
                                 name: this.state.currentProduct.name,
-                                upc_code: this.state.currentProduct.upc_code }
+                                upc_code: this.state.currentProduct.upc_code,
+                                current_qty: this.state.currentProduct.current_qty }
                               )}} 
                 cancelText= {'Cancel'}
                 enterText= {'Enter'}
