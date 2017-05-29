@@ -80,12 +80,15 @@ class Review extends Component {
     this.postSession(sessionType)
     .then(id => {
       Promise.all(this.state.itemArray.map(item => {
-       const count = +item.current_qty
+       const count = item.current_qty
+       // console.log('item', item)
+       console.log(this.state.itemArray)
+       console.log('id', id)
        const lineItem = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
        const data = { lineItem, qty: count }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
-          console.log(res)
+          // console.log(res)
           setTimeout(() => {
             Toast.show('Session uploaded successfully');
             this.props.navigator.popToTop() 
