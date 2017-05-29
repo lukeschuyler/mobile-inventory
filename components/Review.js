@@ -60,7 +60,7 @@ class Review extends Component {
       })
   }
 
-   upload() {
+  upload() {
     this.setState({loading: true})
     let sessionType;
     let sessionKey;
@@ -80,7 +80,9 @@ class Review extends Component {
     this.postSession(sessionType)
     .then(id => {
       Promise.all(this.state.itemArray.map(item => {
-       const data = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
+       const count = item.current_qty
+       const lineItem = { product_id: +item.product_id, [sessionKey]: id, quantity: +item.quantity }
+       const data = { lineItem, qty: count }
        return axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/${sessionType}_line_items`, data)
          .then((res) => {
           setTimeout(() => {

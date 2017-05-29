@@ -17,7 +17,6 @@ import {
 import styles from '../styles/ScannerStyles.js'
 
 const QtyPopup = ({ image, name, code, measure, qty, hideModal, pushItem, onChangeQty }) =>
-
     (
        <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
         <View style={styles.infoContainer}>
