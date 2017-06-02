@@ -33,7 +33,8 @@ export default class Scanner extends Component {
       currentProduct: {},
       sessionArray: this.props.sessionArray,
       qty: '',
-      sessionType: this.props.route.title
+      sessionType: this.props.route.title,
+      addNewProduct: false
     }
     this.onCancel = this.onCancel.bind(this)
     this.onReview = this.onReview.bind(this)
@@ -66,14 +67,17 @@ export default class Scanner extends Component {
       .catch((err) => {
         axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
         .then(res => {
-          if (res.data[0].UPC === e.data) {
-            
+          if (res.data[0].UPC == e.data) {
+            this.setState({addNewProduct: true, currentProduct: res.data[0]})
+          } else if(res.data[1] && res.data[1].UPC == e.data) {
+            this.setState({addNewProduct: true, currentProduct: res.data[1]})
+          } else {
+            Toast.show('Product Not Found');
           }
         })
         .catch(error => {
-          console.log(error)
+            Toast.show('Product Not Found, please try again');
         })
-        Toast.show('Product Not Found');
       })
   }
 
