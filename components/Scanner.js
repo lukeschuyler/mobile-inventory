@@ -67,7 +67,7 @@ export default class Scanner extends Component {
       .catch((err) => {
         axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
         .then(res => {
-          if (res.data[0].UPC == e.data) {
+          if (res.data[0].UPC == e.data.slice(1)) {
             this.setState({addNewProduct: true, currentProduct: res.data[0]})
           } else if(res.data[1] && res.data[1].UPC == e.data) {
             this.setState({addNewProduct: true, currentProduct: res.data[1]})
@@ -203,23 +203,15 @@ export default class Scanner extends Component {
                 <Text style={styles.textBold}>UPC: {this.state.currentProduct.UPC}</Text>  
                <TouchableHighlight 
                   style={styles.cancelBtn} 
-                  onPress={this.addProduct()}>
+                  onPress={() => { this.addProduct() }}>
                  <Text style={styles.btnText}>Add Product</Text>
               </TouchableHighlight>
               </View>
               <ButtonGroup 
-                cancel={() => { this.setModalVisible(false) } }
-                enter={() => { this.onEnter({
-                                measure: this.state.currentProduct.measure,
-                                quantity: +(this.state.qty), 
-                                product_id: this.state.currentProduct.id, 
-                                session_id: +(this.state.session_id),
-                                name: this.state.currentProduct.name,
-                                upc_code: this.state.currentProduct.upc_code,
-                                current_qty: this.state.currentProduct.current_qty }
-                              )}} 
+                cancel={() => { this.setState({addNewProduct: false}) } }
+                enter={() => { this.addProduct() }} 
                 cancelText= {'Cancel'}
-                enterText= {'Enter'}
+                enterText= {'Add Product'}
               />
             </KeyboardAvoidingView>
           </Modal>
