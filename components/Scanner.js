@@ -60,11 +60,18 @@ export default class Scanner extends Component {
   onSuccess(e) {
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
-        console.log(product)
         this.setState({modalVisible: true, currentProduct: product.data})
         this.refs.TextInput.focus()
       })
       .catch((err) => {
+        console.log(e.data)
+        axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(error => {
+          console.log(error)
+        })
         Toast.show('Product Not Found');
       })
   }
