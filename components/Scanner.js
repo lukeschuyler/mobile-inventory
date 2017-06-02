@@ -81,6 +81,10 @@ export default class Scanner extends Component {
       })
   }
 
+  addProduct() {
+    console.log('add')
+  }
+
   // GO BACK TO HOME
 
   onCancel() {
@@ -199,7 +203,7 @@ export default class Scanner extends Component {
                 <Text style={styles.textBold}>UPC: {this.state.currentProduct.UPC}</Text>  
                <TouchableHighlight 
                   style={styles.cancelBtn} 
-                  onPress={cancel}>
+                  onPress={this.addProduct()}>
                  <Text style={styles.btnText}>Add Product</Text>
               </TouchableHighlight>
               </View>
