@@ -64,10 +64,11 @@ export default class Scanner extends Component {
         this.refs.TextInput.focus()
       })
       .catch((err) => {
-        console.log(e.data)
         axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
         .then(res => {
-          console.log(res)
+          if (res.data[0].UPC === e.data) {
+            
+          }
         })
         .catch(error => {
           console.log(error)
