@@ -199,14 +199,6 @@ export default class Scanner extends Component {
                   resizeMode={Image.resizeMode.contain}
                 />
               </View>
-              <View style={styles.qtyConatiner}>
-                <Text style={styles.textBold}>UPC: {this.state.currentProduct.UPC}</Text>  
-               <TouchableHighlight 
-                  style={styles.cancelBtn} 
-                  onPress={() => { this.addProduct() }}>
-                 <Text style={styles.btnText}>Add Product</Text>
-              </TouchableHighlight>
-              </View>
               <ButtonGroup 
                 cancel={() => { this.setState({addNewProduct: false}) } }
                 enter={() => { this.addProduct() }} 
