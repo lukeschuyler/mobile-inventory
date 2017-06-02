@@ -2,7 +2,7 @@
 
 ## Back-End Capstone Mobile Application: Inventory Session Scanner
 
-## Links to Front End Repos:
+## Links to Related Repos:
   [API](https://github.com/lukeschuyler/inventory-mobile-API) 
   
   [Web](https://github.com/lukeschuyler/web-inventory)
@@ -27,3 +27,10 @@ they can upload the session. This takes them back to the Home screen.
 2. Axios
 3. React-Native QRCode-Scanner
 
+<div align="center">
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0017.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0019.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0020.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0021.PNG.png" />
+  <img width="350px" style="{display: inline, margin: 50px}" src="IMG/IMG_0022.PNG.png" />
+</div>

@@ -200,7 +200,7 @@ export default class Scanner extends Component {
           <Modal
             animationType={'none'}
             transparent={false}
-            visible={this.state.addNewProduct}
+            visible={this.state.modalVisible}
             onRequestClose={() => {alert("Modal has been closed.")}}
             >
              <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
