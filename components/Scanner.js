@@ -175,6 +175,52 @@ export default class Scanner extends Component {
           </Modal>
       </View>
       )
+    } else if(this.state.addNewProduct) {
+      let currentProduct = this.state.currentProduct
+      return (
+        <View>
+          <Modal
+            animationType={'none'}
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {alert("Modal has been closed.")}}
+            >
+             <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
+              <View style={styles.infoContainer}>
+               <Text style={styles.textBold}>Add Product to List?</Text>      
+                <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
+                <Image
+                  source={{uri: this.state.currentProduct.image}}
+                  style={styles.productImage}
+                  resizeMode={Image.resizeMode.contain}
+                />
+              </View>
+              <View style={styles.qtyConatiner}>
+                <Text style={styles.textBold}>UPC: {this.state.currentProduct.UPC}</Text>  
+               <TouchableHighlight 
+                  style={styles.cancelBtn} 
+                  onPress={cancel}>
+                 <Text style={styles.btnText}>Add Product</Text>
+              </TouchableHighlight>
+              </View>
+              <ButtonGroup 
+                cancel={() => { this.setModalVisible(false) } }
+                enter={() => { this.onEnter({
+                                measure: this.state.currentProduct.measure,
+                                quantity: +(this.state.qty), 
+                                product_id: this.state.currentProduct.id, 
+                                session_id: +(this.state.session_id),
+                                name: this.state.currentProduct.name,
+                                upc_code: this.state.currentProduct.upc_code,
+                                current_qty: this.state.currentProduct.current_qty }
+                              )}} 
+                cancelText= {'Cancel'}
+                enterText= {'Enter'}
+              />
+            </KeyboardAvoidingView>
+          </Modal>
+      </View>
+      )
     }
   }
 }
