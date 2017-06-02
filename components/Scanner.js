@@ -33,7 +33,8 @@ export default class Scanner extends Component {
       currentProduct: {},
       sessionArray: this.props.sessionArray,
       qty: '',
-      sessionType: this.props.route.title
+      sessionType: this.props.route.title,
+      addNewProduct: false
     }
     this.onCancel = this.onCancel.bind(this)
     this.onReview = this.onReview.bind(this)
@@ -60,13 +61,28 @@ export default class Scanner extends Component {
   onSuccess(e) {
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
-        console.log(product)
         this.setState({modalVisible: true, currentProduct: product.data})
         this.refs.TextInput.focus()
       })
       .catch((err) => {
-        Toast.show('Product Not Found');
+        axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
+        .then(res => {
+          if (res.data[0].UPC == e.data.slice(1)) {
+            this.setState({addNewProduct: true, currentProduct: res.data[0]})
+          } else if(res.data[1] && res.data[1].UPC == e.data) {
+            this.setState({addNewProduct: true, currentProduct: res.data[1]})
+          } else {
+            Toast.show('Product Not Found');
+          }
+        })
+        .catch(error => {
+            Toast.show('Product Not Found, please try again');
+        })
       })
+  }
+
+  addProduct() {
+    console.log('add')
   }
 
   // GO BACK TO HOME
@@ -158,6 +174,36 @@ export default class Scanner extends Component {
                               )}} 
                 cancelText= {'Cancel'}
                 enterText= {'Enter'}
+              />
+            </KeyboardAvoidingView>
+          </Modal>
+      </View>
+      )
+    } else if(this.state.addNewProduct) {
+      let currentProduct = this.state.currentProduct
+      return (
+        <View>
+          <Modal
+            animationType={'none'}
+            transparent={false}
+            visible={this.state.modalVisible}
+            onRequestClose={() => {alert("Modal has been closed.")}}
+            >
+             <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
+              <View style={styles.infoContainer}>
+               <Text style={styles.textBold}>Add Product to List?</Text>      
+                <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
+                <Image
+                  source={{uri: this.state.currentProduct.image}}
+                  style={styles.productImage}
+                  resizeMode={Image.resizeMode.contain}
+                />
+              </View>
+              <ButtonGroup 
+                cancel={() => { this.setState({addNewProduct: false}) } }
+                enter={() => { this.addProduct() }} 
+                cancelText= {'Cancel'}
+                enterText= {'Add Product'}
               />
             </KeyboardAvoidingView>
           </Modal>
