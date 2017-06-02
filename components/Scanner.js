@@ -61,8 +61,22 @@ export default class Scanner extends Component {
   onSuccess(e) {
     axios.get(`https://inventory-manager-ls.herokuapp.com/api/v1/products/${e.data}`)
       .then(product => {
-        this.setState({modalVisible: true, currentProduct: product.data})
-        this.refs.TextInput.focus()
+        if (product.data != null) {
+          this.setState({modalVisible: true, currentProduct: product.data})
+          this.refs.TextInput.focus()    
+        } else {
+          axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
+          .then(res => {
+            if (res.data[0].UPC == e.data.slice(1)) {
+              this.setState({addNewProduct: true, currentProduct: res.data[0]})
+            } else if(res.data[1] && res.data[1].UPC == e.data) {
+                console.log('1', res.data)
+              this.setState({addNewProduct: true, currentProduct: res.data[1]})
+            } else {
+              Toast.show('Product Not Found');
+            }
+          })         
+        }
       })
       .catch((err) => {
         axios.post(`https://inventory-manager-ls.herokuapp.com/api/v1/search`, { query: e.data })
@@ -106,7 +120,7 @@ export default class Scanner extends Component {
   // RENDER
 
   render() {
-    if (!this.state.modalVisible && !this.state.review) {
+    if (!this.state.modalVisible && !this.state.review && !this.state.addNewProduct) {
        return (
         <NavigatorIOS
           initialRoute={{
@@ -179,7 +193,7 @@ export default class Scanner extends Component {
           </Modal>
       </View>
       )
-    } else if(this.state.addNewProduct) {
+    } else if (this.state.addNewProduct) {
       let currentProduct = this.state.currentProduct
       return (
         <View>
@@ -191,10 +205,10 @@ export default class Scanner extends Component {
             >
              <KeyboardAvoidingView behavior="padding" style={styles.modalView}>
               <View style={styles.infoContainer}>
-               <Text style={styles.textBold}>Add Product to List?</Text>      
-                <Text style={styles.textBold}>{this.state.currentProduct.name}</Text>           
+                <Text style={styles.textBold}>Add Product to List?</Text>      
+                <Text style={styles.textBold}>{currentProduct.name}</Text>           
                 <Image
-                  source={{uri: this.state.currentProduct.image}}
+                  source={{uri: currentProduct.image}}
                   style={styles.productImage}
                   resizeMode={Image.resizeMode.contain}
                 />
