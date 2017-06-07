@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cancelBtn: {
-    backgroundColor: 'rgb(217, 30, 24)',
-    height: 70,
-    width: 100,
+    backgroundColor: 'rgba(255,255,0,.8)',
+    height: 80,
+    width: 80,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
   },
   enterBtn: {
     backgroundColor: 'rgba(255,255,0,.8)',
-    height: 70,
-    width: 100,
+    height: 80,
+    width: 80,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
