@@ -34,19 +34,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cancelBtn: {
-    backgroundColor: 'rgba(255,255,0,.8)',
-    height: 80,
-    width: 80,
-    borderRadius: 10,
+    backgroundColor: 'rgba(255,70,0,.8)',
+    height: 100,
+    width: 100,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20
   },
   enterBtn: {
     backgroundColor: 'rgba(255,255,0,.8)',
-    height: 80,
-    width: 80,
-    borderRadius: 10,
+    height: 100,
+    width: 100,
+    borderRadius: 100,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 20
